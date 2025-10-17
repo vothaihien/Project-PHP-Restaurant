@@ -72,6 +72,10 @@ class CheckoutController extends Controller
 
     public function store(Restaurant $restaurant)
     {
+        // Debug: Log session data
+        \Log::info('Session data:', \Session::all());
+        \Log::info('Address in session:', \Session::get('address'));
+        
         if (!\Session::has('address')) {
             return redirect()->back()->withErrors('Please enter your delivery address.');
         }
@@ -103,7 +107,7 @@ class CheckoutController extends Controller
 
             return view('order-complete')->with('success', 'Order Completed Successfully');
         } catch (CardErrorException $e) {
-            $this->addToOrdersTables($restaurant->id, $charge['id'], $e->getMessage());
+            $this->addToOrdersTables($restaurant->id, null, $e->getMessage());
             return redirect()->back()->withErrors('Error! ' . $e->getMessage());
         }
     }
