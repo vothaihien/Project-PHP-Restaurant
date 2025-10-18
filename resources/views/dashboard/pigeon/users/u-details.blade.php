@@ -162,7 +162,7 @@
                         @if($orders->hasPages())
                             <div class="row mt-4">
                                 <div class="col-12 d-flex justify-content-center">
-                                    {{ $orders->links() }}
+                                    {{ $orders->links('vendor.pagination.bootstrap-5') }}
                                 </div>
                             </div>
                         @endif

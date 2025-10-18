@@ -66,7 +66,7 @@
                     <!-- Pagination -->
                     @if($reviews->hasPages())
                         <div class="card-footer">
-                            {{ $reviews->links() }}
+                            {{ $reviews->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     @endif
                 </div>

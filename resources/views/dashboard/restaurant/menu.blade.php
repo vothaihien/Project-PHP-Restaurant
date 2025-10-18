@@ -134,7 +134,7 @@
                     <!-- Pagination -->
                     @if($menu_items->hasPages())
                         <div class="card-footer">
-                            {{ $menu_items->links() }}
+                            {{ $menu_items->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     @endif
                 </div>

@@ -60,7 +60,7 @@
         @if($trips->hasPages())
             <div class="row mt-4">
                 <div class="col-12 d-flex justify-content-center">
-                    {{ $trips->links() }}
+                    {{ $trips->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
         @endif

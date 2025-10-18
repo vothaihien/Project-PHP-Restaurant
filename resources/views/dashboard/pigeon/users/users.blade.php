@@ -103,7 +103,7 @@
                     <!-- Pagination -->
                     @if($users->hasPages())
                         <div class="card-footer">
-                            {{ $users->links() }}
+                            {{ $users->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     @endif
                 </div>

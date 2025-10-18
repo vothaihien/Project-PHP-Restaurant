@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'stripe' => [
+        'model' => env('STRIPE_MODEL', 'App\\User'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
+
 ];
