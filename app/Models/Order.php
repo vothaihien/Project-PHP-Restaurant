@@ -17,7 +17,8 @@ class Order extends Model
         'driver_tip',
         'billing_total',
         'stripe_id',
-        'error'
+        'error',
+        'payment_status'
     ];
 
     public function user()

@@ -107,13 +107,18 @@ class CheckoutController extends Controller
             }
         }
 
-        $cart = \Cart::session($restaurant->id);
-        $order = $this->addToOrdersTables($restaurant->id, null, null);
+        try {
+            $cart = \Cart::session($restaurant->id);
+            $order = $this->addToOrdersTables($restaurant->id, null, null);
 
-        return view('checkout.payment', [
-            'order' => $order,
-            'restaurant' => $restaurant
-        ]);
+            return view('checkout.payment', [
+                'order' => $order,
+                'restaurant' => $restaurant
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error in checkout process: ' . $e->getMessage());
+            return redirect()->back()->withErrors('An error occurred during checkout. Please try again.');
+        }
     }
 
     protected function saveAddressFromSession($user, $sessionAddress)
@@ -171,11 +176,11 @@ class CheckoutController extends Controller
             throw $e;
         }
     }
-    protected function addToOrdersTables($rest_id, $charge_id, $error)
+    protected function addToOrdersTables($rest_id, $charge_id = null, $error = null)
     {
         $cart = \Cart::session($rest_id);
 
-        $order = Order::create([
+        $orderData = [
             'user_id' => auth()->user()->id,
             'restaurant_id' => $rest_id,
             'total_items_qty' => $cart->getTotalQuantity(),
@@ -184,13 +189,22 @@ class CheckoutController extends Controller
             'billing_tax' => number_format($cart->getCondition('GST/QST 14.975%')->getCalculatedValue($cart->getSubTotal()), 2, '.', ','),
             'driver_tip' => number_format($cart->getCondition('Tip')->getValue(), 2, '.', ','),
             'billing_total' => $cart->getTotal(),
-            'stripe_id' => $charge_id,
-            'error' => $error
-        ]);
+            'payment_status' => 'pending'
+        ];
+
+        if ($charge_id) {
+            $orderData['stripe_id'] = $charge_id;
+        }
+
         if ($error) {
-            OrderStatus::create(['order_id' => $order->id, 'status' => 'failed']);
+            $orderData['error'] = $error;
+        }
+
+        $order = Order::create($orderData);
+        if ($error) {
+            OrderStatus::create(['order_id' => $order->id, 'status' => 'failed', 'created_at' => now()]);
         } else {
-            OrderStatus::create(['order_id' => $order->id, 'status' => 'new']);
+            OrderStatus::create(['order_id' => $order->id, 'status' => 'new', 'created_at' => now()]);
         }
         foreach (\Cart::getContent() as $item) {
             OrderMenu::create([
@@ -211,6 +225,7 @@ class CheckoutController extends Controller
                 'country' => \Session::get('address.context.country'),
                 'longitude' => \Session::get('address.coordinates.0'),
                 'latitude' => \Session::get('address.coordinates.1'),
+                'added_on' => now()
             ]);
         } elseif (\Session::get('address.place_type') == 'poi') {
             Address::create([
@@ -223,6 +238,7 @@ class CheckoutController extends Controller
                 'country' => \Session::get('address.context.country'),
                 'longitude' => \Session::get('address.coordinates.0'),
                 'latitude' => \Session::get('address.coordinates.1'),
+                'added_on' => now()
             ]);
         }
 
