@@ -19,7 +19,7 @@
                                 <div class="col-md-5">
                                     <div class="w-50">
                                         <div class="m-row">
-                                            <h5>Status: </h5><h5><span class="badge {{ $order->status->first()->getColor() }}">
+                                            <h5>Status: </h5><h5><span class="badge {{ optional($order->status->first())->getColor() ?? 'badge-secondary' }}">
                                                 {{ str_replace('_', ' ', $order->status->first()->status) }}
                                             </span></h5>
                                         </div>

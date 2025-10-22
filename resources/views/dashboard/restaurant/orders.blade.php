@@ -20,7 +20,8 @@
                     <div class="col-lg-6 col-7">
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i
+                                            class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#">Restaurant</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Orders</li>
                             </ol>
@@ -43,7 +44,8 @@
                         <h3 class="mb-0">Orders</h3>
                     </div>
                     <!-- Table -->
-                    <div class="table-responsive" data-toggle="list" data-list-values='["ordered_at", "status", "quantity", "total"]'>
+                    <div class="table-responsive" data-toggle="list"
+                        data-list-values='["ordered_at", "status", "quantity", "total"]'>
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
@@ -62,7 +64,8 @@
                                         </td>
                                         <td>
                                             <span class="badge badge-dot mr-4">
-                                                <span class="badge {{$order->status->first()->getColor()}}">
+                                                <span
+                                                    class="badge {{ optional($order->status->first())->getColor() ?? 'badge-secondary' }}">
                                                     {{ str_replace('_', ' ', $order->status->first()->status) }}
                                                 </span>
                                             </span>
@@ -74,7 +77,8 @@
                                             ${{ $order->billing_total }}
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm" data-toggle="tooltip" onclick="window.location ='{{ route('restaurant.orderDetails', $order->id) }}'">
+                                            <button class="btn btn-sm" data-toggle="tooltip"
+                                                onclick="window.location ='{{ route('restaurant.orderDetails', $order->id) }}'">
                                                 <i class="fas fa-info-circle"></i> View
                                             </button>
                                         </td>
@@ -96,4 +100,3 @@
         @include('layouts.dashboard.footers.auth')
     </div>
 @endsection
-

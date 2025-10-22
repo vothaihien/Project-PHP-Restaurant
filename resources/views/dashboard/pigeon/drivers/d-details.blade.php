@@ -7,10 +7,12 @@
             display: inline;
             margin-right: 5px;
         }
+
         .list-group-item:first-child {
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+
         .list-group-item:last-child {
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
@@ -40,7 +42,8 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">Account Created On</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">Account Created On
+                                        </h5>
                                         <span class="h2 font-weight-bold mb-0 text-white">{{ $driver->created_at }}</span>
                                     </div>
                                     <div class="col-auto">
@@ -62,7 +65,8 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">Completed Trips</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">Completed Trips
+                                        </h5>
                                         <span class="h2 font-weight-bold mb-0 text-white">0</span>
                                     </div>
                                     <div class="col-auto">
@@ -90,7 +94,8 @@
                                     <div class="col-md-6">
                                         <h6 class="heading-small text-muted mb-4 w-auto">User Information</h6>
                                         <dl class="dl-horizontal pr-4" style="float: left;display: inline-block;">
-                                            <img src="{{ url('storage/'.$driver->profile_picture) }}" alt="driver profile" style="height: 150px;width: 150px;object-fit: cover;">
+                                            <img src="{{ url('storage/' . $driver->profile_picture) }}" alt="driver profile"
+                                                style="height: 150px;width: 150px;object-fit: cover;">
                                         </dl>
                                         <dl class="dl-horizontal pl-md-4" style="height: 150px">
                                             <dt>Email</dt>
@@ -129,8 +134,9 @@
                         <ul class="list-group">
                             @forelse($trips as $trip)
                                 <li class="list-group-item">
-                                    #{{ $trip->id.' | '.$trip->created_at }}
-                                    <span class="badge {{ $trip->status->first()->getColor() }} float-right">{{ $trip->status->first()->status }}</span>
+                                    #{{ $trip->id . ' | ' . $trip->created_at }}
+                                    <span
+                                        class="badge {{ optional($trip->status->first())->getColor() ?? 'badge-secondary' }} float-right">{{ optional($trip->status->first())->status ?? 'unknown' }}</span>
                                 </li>
                             @empty
                                 <li class="list-group-item">{{ $driver->name }} has not completed any trips yet.</li>
@@ -146,8 +152,10 @@
                 <div class="card shadow border-danger">
                     <div class="card-body button-container">
                         @can('delete-restaurant')
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">Delete</button>
-                            <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete" aria-hidden="true">
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#modal-delete">Delete</button>
+                            <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete"
+                                aria-hidden="true">
                                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                                     <div class="modal-content bg-gradient-danger">
                                         <div class="modal-header">
@@ -164,18 +172,20 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <form method="POST" action="{{ route('pigeon.delDriver', $driver->id) }}" enctype="multipart/form-data">
+                                            <form method="POST" action="{{ route('pigeon.delDriver', $driver->id) }}"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 @method('DELETE')
-                                                <input type="submit" value="{{__('Delete')}}" class="btn btn-white"/>
+                                                <input type="submit" value="{{__('Delete')}}" class="btn btn-white" />
                                             </form>
-                                            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-link text-white ml-auto"
+                                                data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @else
-                            <input type="button" value="{{__('Delete')}}" class="btn btn-danger" disabled/>
+                            <input type="button" value="{{__('Delete')}}" class="btn btn-danger" disabled />
                         @endcan
                     </div>
                 </div>
@@ -185,4 +195,3 @@
         @include('layouts.dashboard.footers.auth')
     </div>
 @endsection
-
