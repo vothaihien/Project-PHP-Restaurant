@@ -19,7 +19,7 @@
                                 <div class="col-md-10">
                                     <div class="w-25">
                                         <div class="m-row">
-                                            <h5>Status: </h5><h5><span class="badge {{ $trip->status->first()->getColor() }}">{{ $trip->status->first()->status }}</span></h5>
+                                            <h5>Status: </h5><h5><span class="badge {{ optional($trip->status->first())->getColor() ?? 'badge-secondary' }}">{{ optional($trip->status->first())->status ?? 'unknown' }}</span></h5>
                                         </div>
                                         <div class="m-row">
                                             <h5>Delivery: </h5><h5>{{ $trip->billing_delivery == 0.00 ? 'Free' : '$'.$trip->billing_delivery }}</h5>
@@ -60,7 +60,7 @@
         @if($trips->hasPages())
             <div class="row mt-4">
                 <div class="col-12 d-flex justify-content-center">
-                    {{ $trips->links() }}
+                    {{ $trips->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
         @endif

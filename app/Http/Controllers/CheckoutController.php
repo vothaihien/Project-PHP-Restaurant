@@ -11,8 +11,9 @@ use App\Models\RestaurantHours;
 use App\Models\Mail\OrderPlaced;
 use Illuminate\Support\Facades\Mail;
 use Darryldecode\Cart\CartCondition;
-use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Cartalyst\Stripe\Exception\CardErrorException;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
+use Stripe\Exception\ApiErrorException;
 
 class CheckoutController extends Controller
 {
@@ -72,60 +73,138 @@ class CheckoutController extends Controller
 
     public function store(Restaurant $restaurant)
     {
-        if (!\Session::has('address')) {
+        $user = auth()->user();
+        $sessionAddress = \Session::get('address');
+
+        // Log thông tin để debug
+        \Log::info('Checkout Process:', [
+            'user_id' => $user->id,
+            'session_address' => $sessionAddress,
+            'has_session_address' => !empty($sessionAddress)
+        ]);
+
+        // Kiểm tra địa chỉ đã lưu
+        $storedAddress = Address::where('account_id', $user->id)
+            ->where('description', 'delivery')
+            ->first();
+
+        \Log::info('Stored Address:', [
+            'stored_address' => $storedAddress
+        ]);
+
+        if (empty($sessionAddress) && !$storedAddress) {
+            \Log::error('No address found for checkout');
             return redirect()->back()->withErrors('Please enter your delivery address.');
         }
-        $cart = \Cart::session($restaurant->id);
-        $contents = $cart->getContent()->map(function ($item) {
-            return $item->name . ', ' . $item->quantity;
-        })->values()->toJson();
+
+        // Nếu có địa chỉ trong session, lưu nó cho user
+        if (!empty($sessionAddress)) {
+            try {
+                $this->saveAddressFromSession($user, $sessionAddress);
+                \Log::info('New address saved from session');
+            } catch (\Exception $e) {
+                \Log::error('Error saving address: ' . $e->getMessage());
+            }
+        }
 
         try {
-            $charge = Stripe::charges()->create([
-                'amount' => $cart->getTotal(),
-                'currency' => 'CAD',
-                'source' => request()->stripeToken,
-                'description' => 'Order',
-                'receipt_email' => auth()->user()->email,
-                'metadata' => [
-                    'contents' => $contents,
-                    'quantity' => $cart->getTotalQuantity()
-                ],
+            $cart = \Cart::session($restaurant->id);
+            $order = $this->addToOrdersTables($restaurant->id, null, null);
+
+            return view('checkout.payment', [
+                'order' => $order,
+                'restaurant' => $restaurant
             ]);
-
-            $order = $this->addToOrdersTables($restaurant->id, $charge['id'], null);
-
-            //SEND ORDER PLACED EMAIL TO USER
-            Mail::send(new OrderPlaced($order));
-
-            //SUCCESSFUL
-            $cart->clear();
-
-            return view('order-complete')->with('success', 'Order Completed Successfully');
-        } catch (CardErrorException $e) {
-            $this->addToOrdersTables($restaurant->id, $charge['id'], $e->getMessage());
-            return redirect()->back()->withErrors('Error! ' . $e->getMessage());
+        } catch (\Exception $e) {
+            \Log::error('Error in checkout process: ' . $e->getMessage());
+            return redirect()->back()->withErrors('An error occurred during checkout. Please try again.');
         }
     }
 
-    protected function addToOrdersTables($rest_id, $charge_id, $error)
+    protected function saveAddressFromSession($user, $sessionAddress)
     {
-        $order = Order::create([
+        \Log::info('Saving address from session:', [
+            'session_data' => $sessionAddress
+        ]);
+
+        try {
+            // Kiểm tra xem địa chỉ đã tồn tại chưa
+            $existingAddress = Address::where('account_id', $user->id)
+                ->where('description', 'delivery')
+                ->first();
+
+            if (!$existingAddress) {
+                $addressData = [
+                    'account_id' => $user->id,
+                    'description' => 'delivery'
+                ];
+
+                // Xử lý dựa trên loại địa chỉ
+                if (isset($sessionAddress['place_type']) && $sessionAddress['place_type'] == 'poi') {
+                    $addressData += [
+                        'street_address' => $sessionAddress['short'] ?? '',
+                        'city' => $sessionAddress['context']['city'] ?? '',
+                        'province' => $sessionAddress['context']['province'] ?? '',
+                        'postal_code' => isset($sessionAddress['place_name']) ?
+                            ltrim(strstr(ltrim(explode(',', $sessionAddress['place_name'])[3]), ' ')) : '',
+                        'country' => $sessionAddress['context']['country'] ?? '',
+                        'longitude' => $sessionAddress['coordinates'][0] ?? null,
+                        'latitude' => $sessionAddress['coordinates'][1] ?? null,
+                    ];
+                } else {
+                    $addressData += [
+                        'street_address' => $sessionAddress['place_name'] ?? '',
+                        'city' => $sessionAddress['context']['city'] ?? '',
+                        'province' => $sessionAddress['context']['province'] ?? '',
+                        'postal_code' => isset($sessionAddress['place_name']) ?
+                            ltrim(strstr(ltrim(explode(',', $sessionAddress['place_name'])[2]), ' ')) : '',
+                        'country' => $sessionAddress['context']['country'] ?? '',
+                        'longitude' => $sessionAddress['coordinates'][0] ?? null,
+                        'latitude' => $sessionAddress['coordinates'][1] ?? null,
+                    ];
+                }
+
+                \Log::info('Creating new address:', $addressData);
+                Address::create($addressData);
+            } else {
+                \Log::info('Address already exists:', [
+                    'existing_address' => $existingAddress
+                ]);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error in saveAddressFromSession: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+    protected function addToOrdersTables($rest_id, $charge_id = null, $error = null)
+    {
+        $cart = \Cart::session($rest_id);
+
+        $orderData = [
             'user_id' => auth()->user()->id,
             'restaurant_id' => $rest_id,
-            'total_items_qty' => \Cart::getTotalQuantity(),
-            'billing_subtotal' => \Cart::getSubtotal(),
-            'billing_delivery' => \Cart::getCondition('Delivery Fee')->getValue(),
-            'billing_tax' => number_format(\Cart::getCondition('GST/QST 14.975%')->getCalculatedValue(\Cart::getSubTotal()), 2, '.', ','),
-            'driver_tip' => number_format(\Cart::getCondition('Tip')->getValue(), 2, '.', ','),
-            'billing_total' => \Cart::getTotal(),
-            'stripe_id' => $charge_id,
-            'error' => $error
-        ]);
+            'total_items_qty' => $cart->getTotalQuantity(),
+            'billing_subtotal' => $cart->getSubtotal(),
+            'billing_delivery' => $cart->getCondition('Delivery Fee')->getValue(),
+            'billing_tax' => number_format($cart->getCondition('GST/QST 14.975%')->getCalculatedValue($cart->getSubTotal()), 2, '.', ','),
+            'driver_tip' => number_format($cart->getCondition('Tip')->getValue(), 2, '.', ','),
+            'billing_total' => $cart->getTotal(),
+            'payment_status' => 'pending'
+        ];
+
+        if ($charge_id) {
+            $orderData['stripe_id'] = $charge_id;
+        }
+
         if ($error) {
-            OrderStatus::create(['order_id' => $order->id, 'status' => 'failed']);
+            $orderData['error'] = $error;
+        }
+
+        $order = Order::create($orderData);
+        if ($error) {
+            OrderStatus::create(['order_id' => $order->id, 'status' => 'failed', 'created_at' => now()]);
         } else {
-            OrderStatus::create(['order_id' => $order->id, 'status' => 'new']);
+            OrderStatus::create(['order_id' => $order->id, 'status' => 'new', 'created_at' => now()]);
         }
         foreach (\Cart::getContent() as $item) {
             OrderMenu::create([
@@ -146,6 +225,7 @@ class CheckoutController extends Controller
                 'country' => \Session::get('address.context.country'),
                 'longitude' => \Session::get('address.coordinates.0'),
                 'latitude' => \Session::get('address.coordinates.1'),
+                'added_on' => now()
             ]);
         } elseif (\Session::get('address.place_type') == 'poi') {
             Address::create([
@@ -158,6 +238,7 @@ class CheckoutController extends Controller
                 'country' => \Session::get('address.context.country'),
                 'longitude' => \Session::get('address.coordinates.0'),
                 'latitude' => \Session::get('address.coordinates.1'),
+                'added_on' => now()
             ]);
         }
 

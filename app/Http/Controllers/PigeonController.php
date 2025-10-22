@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use Stripe\StripeClient;
 
 class PigeonController extends Controller
 {
@@ -118,11 +119,41 @@ class PigeonController extends Controller
 
     public function refundOrder(Order $order)
     {
-        Stripe::refunds()->create($order->stripe_id);
-        OrderStatus::create(['order_id' => $order->id, 'status' => 'refunded']);
+        // Stripe::refunds()->create($order->stripe_id);
+        // OrderStatus::create(['order_id' => $order->id, 'status' => 'refunded']);
 
-        Mail::send(new OrderRefunded($order));
-        return redirect()->back()->with('success', 'Order Refunded Successfully');
+        // Mail::send(new OrderRefunded($order));
+        // return redirect()->back()->with('success', 'Order Refunded Successfully');
+
+        $secret = config('services.stripe.secret') ?? env('STRIPE_SECRET');
+        if (!$secret) {
+            return redirect()->back()->with('error', 'Stripe secret not configured.');
+        }
+
+        try {
+            $stripe = new StripeClient($secret);
+
+            // $order->stripe_id có thể là payment_intent (pi_...) hoặc charge (ch_...)
+            if (str_starts_with($order->stripe_id, 'pi_')) {
+                // refund by payment_intent
+                $refund = $stripe->refunds->create([
+                    'payment_intent' => $order->stripe_id,
+                ]);
+            } else {
+                // fallback: try as charge id
+                $refund = $stripe->refunds->create([
+                    'charge' => $order->stripe_id,
+                ]);
+            }
+
+            OrderStatus::create(['order_id' => $order->id, 'status' => 'refunded']);
+            Mail::send(new OrderRefunded($order));
+
+            return redirect()->back()->with('success', 'Order Refunded Successfully');
+        } catch (\Exception $e) {
+            \Log::error('Stripe refund error: ' . $e->getMessage(), ['order_id' => $order->id]);
+            return redirect()->back()->with('error', 'Refund failed: ' . $e->getMessage());
+        }
     }
 
     public function activateRestaurant(Restaurant $restaurant)

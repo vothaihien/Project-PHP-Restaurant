@@ -34,7 +34,7 @@
                             <div class="card-body">
                                 <dl class="dl-horizontal" style="float: left;display: inline-block">
                                     <dt>Order Status:</dt>
-                                    <dd><span class="badge {{ $order->status->first()->getColor() }}" style="font-size: 0.8rem">{{ $order->status->first()->status }}</span></dd>
+                                    <dd><span class="badge {{ optional($order->status->first())->getColor() ?? 'badge-secondary' }}" style="font-size: 0.8rem">{{ optional($order->status->first())->status ?? 'unknown' }}</span></dd>
 
                                     <dt class="mt-4">Order Placed At:</dt>
                                     <dd>{{$order->created_at}}</dd>

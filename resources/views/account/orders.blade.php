@@ -19,7 +19,7 @@
                                 <div class="col-md-5">
                                     <div class="w-50">
                                         <div class="m-row">
-                                            <h5>Status: </h5><h5><span class="badge {{ $order->status->first()->getColor() }}">
+                                            <h5>Status: </h5><h5><span class="badge {{ optional($order->status->first())->getColor() ?? 'badge-secondary' }}">
                                                 {{ str_replace('_', ' ', $order->status->first()->status) }}
                                             </span></h5>
                                         </div>
@@ -91,7 +91,7 @@
         @if($orders->hasPages())
             <div class="row mt-4">
                 <div class="col-12 d-flex justify-content-center">
-                    {{ $orders->links() }}
+                    {{ $orders->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
         @endif

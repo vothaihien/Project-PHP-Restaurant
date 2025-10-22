@@ -17,7 +17,8 @@ class Order extends Model
         'driver_tip',
         'billing_total',
         'stripe_id',
-        'error'
+        'error',
+        'payment_status'
     ];
 
     public function user()
@@ -52,12 +53,17 @@ class Order extends Model
 
     public function fullAddress()
     {
-        return $this->address->street_address . ', ' . $this->address->city . ' ' . $this->address->province . ', ' . $this->address->postal_code;
+        if (!$this->address) {
+            return '';
+        }
+
+        return ($this->address->street_address ?? '') . ', ' . ($this->address->city ?? '') . ' ' . ($this->address->province ?? '') . ', ' . ($this->address->postal_code ?? '');
     }
 
     public function isBlocked()
     {
-        if ($this->status->first()->status === 'failed' || $this->status->first()->status === 'cancelled' || $this->status->first()->status === 'refunded') {
+        $st = optional($this->status->first())->status;
+        if (in_array($st, ['failed', 'cancelled', 'refunded'])) {
             return true;
         }
         return false;

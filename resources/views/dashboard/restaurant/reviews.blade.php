@@ -14,7 +14,8 @@
                     <div class="col-lg-6 col-7">
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i
+                                            class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#">Restaurant</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Feedback</li>
                             </ol>
@@ -34,10 +35,12 @@
                 <div class="card shadow">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Rating: <span class="{{ App\Review::getAvgColor($avgRating) }}" style="font-size: large">{{ $avgRating }}</span></h3>
+                        <h3 class="mb-0">Rating: <span class="{{ App\Review::getAvgColor($avgRating) }}"
+                                style="font-size: large">{{ $avgRating }}</span></h3>
                     </div>
                     <!-- Table -->
-                    <div class="table-responsive" data-toggle="list" data-list-values='[ "rating", "comment", "created_at"]'>
+                    <div class="table-responsive" data-toggle="list"
+                        data-list-values='[ "rating", "comment", "created_at"]'>
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
@@ -50,7 +53,8 @@
                                 @foreach($reviews as $review)
                                     <tr>
                                         <td>
-                                            <span class="{{$review->getColor()}}" style="font-size: larger">{{ $review->rating }}</span>
+                                            <span class="{{ optional($review)->getColor() ?? 'text-muted' }}"
+                                                style="font-size: larger">{{ $review->rating }}</span>
                                         </td>
                                         <td>
                                             {{ $review->comment ?? 'N/A' }}
@@ -66,7 +70,7 @@
                     <!-- Pagination -->
                     @if($reviews->hasPages())
                         <div class="card-footer">
-                            {{ $reviews->links() }}
+                            {{ $reviews->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     @endif
                 </div>
@@ -76,4 +80,3 @@
         @include('layouts.dashboard.footers.auth')
     </div>
 @endsection
-

@@ -214,7 +214,7 @@
             }
 
             // Create a Stripe client.
-            var stripe = Stripe('pk_test_mNjesFca5FunBm9OGl3vYC8C00cS5CP03i');
+            var stripe = Stripe('{{ config('services.stripe.key') }}');
 
             // Create an instance of Elements.
             var elements = stripe.elements();

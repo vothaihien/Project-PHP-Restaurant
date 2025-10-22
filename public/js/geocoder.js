@@ -12,15 +12,15 @@ if (!mapboxgl.supported()) {
         bbox: [-74.0917, 45.3579, -73.2711, 45.7378],
         proximity: [-73.65, 45.5087],
         // applies a client side filter to further limit results to those strictly within the Quebec region
-        filter: function(item) {
+        filter: function (item) {
             return item.context
-                .map(function(i) {
+                .map(function (i) {
                     return (
                         i.id.split('.').shift() === 'region' &&
                         i.text === 'Quebec'
                     );
                 })
-                .reduce(function(acc, cur) {
+                .reduce(function (acc, cur) {
                     return acc || cur;
                 });
         },
@@ -42,7 +42,7 @@ if (!mapboxgl.supported()) {
     async function makePostRequest(req) {
         var token = document.head.querySelector('meta[name="csrf-token"]');
         window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-        await axios.post('http://localhost/public/home', req);
+        await axios.post('/home', req);
     }
     geocoder.addTo('#geocoder')
 }

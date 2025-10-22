@@ -6,6 +6,7 @@
             background-color: #e3e3e3;
             padding: 0.5rem;
         }
+
         .button-container form,
         .button-container form div {
             display: inline;
@@ -60,22 +61,28 @@
                             </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
-                                    <h3>Total Items: </h3><h3>{{ $order->total_items_qty }}</h3>
+                                    <h3>Total Items: </h3>
+                                    <h3>{{ $order->total_items_qty }}</h3>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <h3>Subtotal: </h3><h3>${{ $order->billing_subtotal }}</h3>
+                                    <h3>Subtotal: </h3>
+                                    <h3>${{ $order->billing_subtotal }}</h3>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <h3>Delivery Fee: </h3><h3>{{ $order->billing_delivery == 0.00 ? 'Free' : '$'.$order->billing_delivery }}</h3>
+                                    <h3>Delivery Fee: </h3>
+                                    <h3>{{ $order->billing_delivery == 0.00 ? 'Free' : '$' . $order->billing_delivery }}</h3>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <h3>GST/QST: </h3><h3>${{ $order->billing_tax }}</h3>
+                                    <h3>GST/QST: </h3>
+                                    <h3>${{ $order->billing_tax }}</h3>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <h3>Tip: </h3><h3>${{ $order->driver_tip }}</h3>
+                                    <h3>Tip: </h3>
+                                    <h3>${{ $order->driver_tip }}</h3>
                                 </div>
                                 <div class="d-flex justify-content-between total">
-                                    <h3 class="mb-0"><b>Total: </b></h3><h3 class="mb-0"><b>${{ $order->billing_total }}</b></h3>
+                                    <h3 class="mb-0"><b>Total: </b></h3>
+                                    <h3 class="mb-0"><b>${{ $order->billing_total }}</b></h3>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +100,8 @@
                                 <div class="list-group">
                                     @foreach($statuses as $status)
                                         <div class="pb-2 d-flex justify-content-between h3">
-                                            <span class="badge {{ $status->getColor() }}">{{ str_replace('_', ' ', $status->status) }}</span>
+                                            <span
+                                                class="badge {{ optional($status)->getColor() ?? 'badge-secondary' }}">{{ str_replace('_', ' ', optional($status)->status ?? 'unknown') }}</span>
                                             <span>{{ Carbon\Carbon::parse($status->created_at)->toTimeString() }}</span>
                                         </div>
                                     @endforeach
@@ -110,8 +118,10 @@
                 <div class="card shadow border-danger">
                     <div class="card-body button-container">
                         <a href="{{ route('pigeon.userDetails', $order->user->id) }}" class="btn btn-info">View User</a>
-                        <a href="{{ route('pigeon.restaurantDetails', $order->restaurant->slug) }}" class="btn btn-info">View Restaurant</a>
-                        @if($order->driver)<a href="{{ route('pigeon.driverDetails', $order->driver->id) }}" class="btn btn-info">View Driver</a>@endif
+                        <a href="{{ route('pigeon.restaurantDetails', $order->restaurant->slug) }}"
+                            class="btn btn-info">View Restaurant</a>
+                        @if($order->driver)<a href="{{ route('pigeon.driverDetails', $order->driver->id) }}"
+                        class="btn btn-info">View Driver</a>@endif
                         @if(!$order->isBlocked())
                             <form method="POST" action="{{ route('pigeon.refundOrder', $order->id) }}">
                                 @csrf
@@ -134,4 +144,3 @@
         @include('layouts.dashboard.footers.auth')
     </div>
 @endsection
-

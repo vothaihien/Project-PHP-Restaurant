@@ -10,7 +10,7 @@ class OrderStatus extends Model
     protected $touches = ['order'];
     protected $with = ['order'];
 
-    protected $fillable = ['order_id', 'status'];
+    protected $fillable = ['order_id', 'status', 'created_at'];
 
     public function order()
     {
