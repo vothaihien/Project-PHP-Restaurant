@@ -113,7 +113,11 @@ class PigeonController extends Controller
 
     public function cancelOrder(Order $order)
     {
-        OrderStatus::create(['order_id' => $order->id, 'status' => 'cancelled']);
+        OrderStatus::create([
+            'order_id' => $order->id,
+            'status' => 'cancelled',
+            'created_at' => now()
+        ]);
         return redirect()->back()->with('success', 'Order Cancelled Successfully');
     }
 
@@ -146,7 +150,11 @@ class PigeonController extends Controller
                 ]);
             }
 
-            OrderStatus::create(['order_id' => $order->id, 'status' => 'refunded']);
+            OrderStatus::create([
+                'order_id' => $order->id,
+                'status' => 'refunded',
+                'created_at' => now()
+            ]);
             Mail::send(new OrderRefunded($order));
 
             return redirect()->back()->with('success', 'Order Refunded Successfully');

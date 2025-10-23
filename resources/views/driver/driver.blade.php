@@ -13,7 +13,7 @@
                 </button>
             </div>
         @endif
-        @if(\Gate::denies('license-is-created', auth()->user()->id))
+        @if(!auth()->user()->drivers_license)
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                 <span class="alert-text"><strong>Attention!</strong> You have not provided your Drivers License.
