@@ -83,7 +83,7 @@
                         <h2 class="mb-0"><i class="fa fa-clock"></i> Operating Hours</h2>
                     </div>
                     <div class="card-body">
-                        @if(\App\RestaurantHours::hoursExist())
+                        @if(\App\Models\RestaurantHours::hoursExist())
                             <form method="POST" action="{{ route('updateOperatingHours') }}">
                                 @method('PATCH')
                         @else
@@ -94,20 +94,20 @@
                             @for($i = 1; $i < 8; $i++)
                                     <div class="form-group">
                                         <div class="row">
-                                            <label for="{{ 'day-'.$i }}" class="col-md-6 col-form-label form-control-label">{{ \App\RestaurantHours::dayFromNumber($i)}}</label>
-                                            <label for="{{ 'day-'.$i }}" class="col-md-6 col-form-label form-control-label">{!! \App\RestaurantHours::hoursExist() ? \App\RestaurantHours::setStatus($i) : ''!!}</label>
+                                            <label for="{{ 'day-'.$i }}" class="col-md-6 col-form-label form-control-label">{{ \App\Models\RestaurantHours::dayFromNumber($i)}}</label>
+                                            <label for="{{ 'day-'.$i }}" class="col-md-6 col-form-label form-control-label">{!! \App\Models\RestaurantHours::hoursExist() ? \App\Models\RestaurantHours::setStatus($i) : ''!!}</label>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input class="form-control" type="time" value="{{ \App\RestaurantHours::hoursExist() ? old($i.'-open') ?? \App\RestaurantHours::getOpenTime($i) : old($i.'-open')}}" id="{{ $i.'-open' }}" name="{{ $i.'-open' }}">
+                                                <input class="form-control" type="time" value="{{ \App\Models\RestaurantHours::hoursExist() ? old($i.'-open') ?? \App\Models\RestaurantHours::getOpenTime($i) : old($i.'-open')}}" id="{{ $i.'-open' }}" name="{{ $i.'-open' }}">
                                             </div>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="time" value="{{ \App\RestaurantHours::hoursExist() ? old($i.'-open') ?? \App\RestaurantHours::getCloseTime($i) : old($i.'-close')}}" id="{{ $i.'-close' }}" name="{{ $i.'-close' }}">
+                                                <input class="form-control" type="time" value="{{ \App\Models\RestaurantHours::hoursExist() ? old($i.'-open') ?? \App\Models\RestaurantHours::getCloseTime($i) : old($i.'-close')}}" id="{{ $i.'-close' }}" name="{{ $i.'-close' }}">
                                             </div>
                                         </div>
                                     </div>
                                 @endfor
-                            <button type="submit" class="btn btn-primary btn-block">{{ \App\RestaurantHours::hoursExist() ? __('Save Changes') : __('Set Hours') }}</button>
+                            <button type="submit" class="btn btn-primary btn-block">{{ \App\Models\RestaurantHours::hoursExist() ? __('Save Changes') : __('Set Hours') }}</button>
                         </form>
                     </div>
                 </div>
