@@ -57,7 +57,7 @@
             <div class="row mt-5">
                 <label for="card-element" style="font-size: 1.5rem">Address</label>
                 @if(\Session::has('address'))
-                    <div id="mapbox" data-lng="{{ \Session::get('address.coordinates.0', '-73.65') }}" data-lat="{{ \Session::get('address.coordinates.1', '45.5087') }}" class="checkout-map" ></div>
+                    <div id="mapbox" data-lng="{{ \Session::get('address.coordinates.0', '106.6975') }}" data-lat="{{ \Session::get('address.coordinates.1', '10.7758') }}" class="checkout-map" ></div>
                 @endif
                 <div class="address payment">
                     <h5 class="d-inline-block mb-0">{{ substr(\Session::get('address.place_name', ''),0,strrpos(\Session::get('address.place_name', ''),',')) }}</h5>
@@ -114,8 +114,8 @@
                 <h5>{{ $restaurant->delivery_fee == 0.00 ? 'Free' : '$'.\Cart::getCondition('Delivery Fee')->getValue() }}</h5>
             </div>
             <div class="m-row mt-1">
-                <h5>GST/QST: </h5>
-                <h5>${{ number_format(\Cart::getCondition('GST/QST 14.975%')->getCalculatedValue(\Cart::getSubTotal()), 2, '.', ',') }}</h5>
+                <h5>VAT (10%): </h5>
+                <h5>${{ number_format(\Cart::getCondition('VAT 10%')->getCalculatedValue(\Cart::getSubTotal()), 2, '.', ',') }}</h5>
             </div>
             <hr>
             <div class=" m-row">

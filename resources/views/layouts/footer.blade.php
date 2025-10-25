@@ -25,10 +25,10 @@
         <div class="col-6 col-md">
             <h5>Locations</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="{{ route('home.index') }}">Montreal</a></li>
-                <li><a class="text-muted" href="#">Laval</a></li>
-                <li><a class="text-muted" href="#">Toronto</a></li>
-                <li><a class="text-muted" href="#">Ottawa</a></li>
+                <li><a class="text-muted" href="{{ route('home.index') }}">Quận 1</a></li>
+                <li><a class="text-muted" href="#">Quận 3</a></li>
+                <li><a class="text-muted" href="#">Bình Thạnh</a></li>
+                <li><a class="text-muted" href="#">Phú Nhuận</a></li>
             </ul>
         </div>
         <div class="col-6 col-md">

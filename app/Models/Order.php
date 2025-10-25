@@ -78,9 +78,12 @@ class Order extends Model
 
     public function scopeGetDriverReserved($query)
     {
-        return $query->where('driver_id', auth()->user()->id)->whereDoesntHave('status', function ($q) {
-            $q->where('status', 'delivered');
-        })->latest();
+        return $query->where('driver_id', auth()->user()->id)
+            ->whereHas('status', function ($q) {
+                // Chỉ lấy orders đang active (reserved hoặc food_picked_up)
+                $q->whereIn('status', ['reserved', 'food_picked_up']);
+            })
+            ->latest();
     }
 
     public function scopeGetDriverCompletedOrders($query, $driver = null)
