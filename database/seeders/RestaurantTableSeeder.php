@@ -72,7 +72,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'thai-express',
             'email' => 'owner@thaiexpress.com',
             'phone' => '5145437766',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 12,
             'image' => 'uploads/NH3.jpg',
             'active' => 1
@@ -82,7 +82,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'burger-king',
             'email' => 'king@burgerking.com',
             'phone' => '5141123217',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 20,
             'image' => 'uploads/NH4.jpg',
             'delivery_fee' => '3.50',
@@ -93,7 +93,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'in-n-out-burger',
             'email' => 'restaurants@in-n-out.com',
             'phone' => '4506339527',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 20,
             'image' => 'uploads/NH5.jpg',
             'delivery_fee' => '5.00',
@@ -104,7 +104,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'fisshu',
             'email' => 'sushi@fisshu.com',
             'phone' => '5143191862',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 15,
             'image' => 'uploads/NH6.jpg',
             'active' => 1
@@ -114,7 +114,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'dunns',
             'email' => 'info@dunnsfamous.com',
             'phone' => '5143951927',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 19,
             'image' => 'uploads/NH7.jpg',
             'delivery_fee' => '5.25',
@@ -125,7 +125,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'scores',
             'email' => 'info@scores.ca',
             'phone' => '5143342828',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 9,
             'image' => 'uploads/NH8.jpg',
             'delivery_fee' => '1.00',
@@ -136,7 +136,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'mikes',
             'email' => 'toujours@mikes.ca',
             'phone' => '5143319655',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 14,
             'image' => 'uploads/NH9.jpg',
             'active' => 1
@@ -146,7 +146,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'st-hubert',
             'email' => 'restaurant@sthubert.ca',
             'phone' => '5146374417',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 9,
             'image' => 'uploads/NH10.jpg',
             'delivery_fee' => '1.00',
@@ -157,7 +157,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'boustan',
             'email' => 'boustancuisine@gmail.com',
             'phone' => '5148433194',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 22,
             'image' => 'uploads/NH11.jpg',
             'active' => 1
@@ -167,7 +167,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'wendys',
             'email' => 'wendys@info.com',
             'phone' => '5144814060',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 20,
             'image' => 'uploads/NH12.jpg',
             'delivery_fee' => '2.25',
@@ -178,7 +178,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'bbq-tandoori',
             'email' => 'bbq@tandoori.ca',
             'phone' => '5145959000',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 27,
             'image' => 'uploads/NH13.jpg',
             'active' => 1
@@ -188,7 +188,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'dominos-pizza',
             'email' => 'dominospizza@contactus.com',
             'phone' => '514845555',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 14,
             'image' => 'uploads/NH14.jpg',
             'active' => 1
@@ -198,7 +198,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'la-shish',
             'email' => 'lashishairlie@gmail.com',
             'phone' => '4383337475',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 22,
             'image' => 'uploads/NH15.jpg',
             'active' => 1
@@ -208,7 +208,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'tacos-frida',
             'email' => 'tacosfrida@mtl.com',
             'phone' => '5145482061',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 26,
             'image' => 'uploads/NH16.jpg',
             'active' => 1
@@ -218,7 +218,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'la-belle-province',
             'email' => 'labellepro@restaurant.ca',
             'phone' => '5143631305',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 20,
             'image' => 'uploads/NH17.jpg',
             'active' => 1
@@ -228,7 +228,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'lafleur',
             'email' => 'restolafleur@info.ca',
             'phone' => '4506560005',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 20,
             'image' => 'uploads/NH18.jpg',
             'delivery_fee' => '2.00',
@@ -239,7 +239,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'sushi-plus',
             'email' => 'sushiplus@mtl.ca',
             'phone' => '5147391888',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 15,
             'image' => 'uploads/NH19.jpg',
             'active' => 1
@@ -249,7 +249,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'marathon-souvlaki',
             'email' => 'marathon@souvlaki.ca',
             'phone' => '5147316455',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 8,
             'image' => 'uploads/NH20.jpg',
             'active' => 1
@@ -259,7 +259,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'o-fuzion',
             'email' => 'ofuzion@mtl.ca',
             'phone' => '5147271889',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 25,
             'image' => 'uploads/NH21.jpg',
             'delivery_fee' => '2.75',
@@ -270,7 +270,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'tabla-village',
             'email' => 'tablavillage@gmail.com',
             'phone' => '5145236464',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 27,
             'image' => 'uploads/NH22.jpg',
             'active' => 1
@@ -280,7 +280,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'heirloom-pizzeria',
             'email' => 'pizzeriaheirloom@gmail.com',
             'phone' => '5149058211',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 7,
             'image' => 'uploads/NH23.jpg',
             'active' => 1
@@ -290,7 +290,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'la-banquise',
             'email' => 'labanquise@poutine.ca',
             'phone' => '5145252415',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 11,
             'image' => 'uploads/NH24.jpg',
             'delivery_fee' => '2.99',
@@ -301,7 +301,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'aux-vivres',
             'email' => 'info@auxvivres.ca',
             'phone' => '5145431267',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 13,
             'image' => 'uploads/NH25.jpg',
             'active' => 1
@@ -311,7 +311,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'kwizinn-creole',
             'email' => 'kwizinnexpress@info.ca',
             'phone' => '5143796670',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 28,
             'image' => 'uploads/NH26.jpg',
             'active' => 1
@@ -321,7 +321,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'firegrill',
             'email' => 'firegrill@gmail.com',
             'phone' => '5148320222',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 21,
             'image' => 'uploads/NH27.jpg',
             'delivery_fee' => '4.01',
@@ -332,7 +332,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'mandys',
             'email' => 'salademandys@info.ca',
             'phone' => '5144190779',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 10,
             'image' => 'uploads/NH28.jpg',
             'active' => 1
@@ -342,7 +342,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'cacao-70',
             'email' => 'cacao70@eatery.com',
             'phone' => '5148444442',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 5,
             'image' => 'uploads/NH29.jpg',
             'active' => 1
@@ -352,7 +352,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'peddlers',
             'email' => 'peddlers@restaurant.ca',
             'phone' => '5143647204',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 4,
             'image' => 'uploads/NH30.jpg',
             'active' => 1
@@ -362,7 +362,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'sunset-diner',
             'email' => 'sunset@restaurant.ca',
             'phone' => '5143647205',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 2,
             'image' => 'uploads/NH31.jpg',
             'active' => 1
@@ -373,7 +373,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'ocean-grill',
             'email' => 'ocean@restaurant.ca',
             'phone' => '5143647206',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 3,
             'image' => 'uploads/NH32.jpg',
             'active' => 1
@@ -384,7 +384,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'golden-spoon',
             'email' => 'golden@restaurant.ca',
             'phone' => '5143647207',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 1,
             'image' => 'uploads/NH33.jpg',
             'active' => 1
@@ -395,7 +395,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'la-piazza',
             'email' => 'lapiazza@restaurant.ca',
             'phone' => '5143647208',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 4,
             'image' => 'uploads/NH34.jpg',
             'active' => 1
@@ -406,7 +406,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'sakura-garden',
             'email' => 'sakura@restaurant.ca',
             'phone' => '5143647209',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 5,
             'image' => 'uploads/NH35.jpg',
             'active' => 1
@@ -417,7 +417,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'curry-house',
             'email' => 'curryhouse@restaurant.ca',
             'phone' => '5143647210',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 6,
             'image' => 'uploads/NH36.jpg',
             'active' => 1
@@ -428,7 +428,7 @@ class RestaurantTableSeeder extends Seeder
             'slug' => 'urban-eats',
             'email' => 'urban@restaurant.ca',
             'phone' => '5143647211',
-            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret,
+            'password' => 'y$kHZBnAAppOfXP4GrHegquOw12ooCcT8bDOi0V1kkM8X/GYLNnW7uC', // secret
             'category_id' => 3,
             'image' => 'uploads/NH37.jpg',
             'active' => 1
