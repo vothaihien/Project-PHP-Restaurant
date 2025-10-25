@@ -6,18 +6,18 @@ if (!mapboxgl.supported()) {
     var geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
-        placeholder: 'Enter your address',
-        countries: 'ca',
+        placeholder: 'Nhập địa chỉ của bạn',
+        countries: 'vn',
         types: 'address,poi',
-        bbox: [-74.0917, 45.3579, -73.2711, 45.7378],
-        proximity: [-73.65, 45.5087],
-        // applies a client side filter to further limit results to those strictly within the Quebec region
+        bbox: [106.4, 10.5, 107.0, 11.2],
+        proximity: [106.6975, 10.7758],
+        // applies a client side filter to further limit results to those strictly within the Ho Chi Minh City region
         filter: function (item) {
             return item.context
                 .map(function (i) {
                     return (
-                        i.id.split('.').shift() === 'region' &&
-                        i.text === 'Quebec'
+                        i.id.split('.').shift() === 'place' &&
+                        (i.text === 'Ho Chi Minh City' || i.text === 'Thành phố Hồ Chí Minh' || i.text === 'TP.Hồ Chí Minh')
                     );
                 })
                 .reduce(function (acc, cur) {

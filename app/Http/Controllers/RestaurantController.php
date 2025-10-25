@@ -24,7 +24,57 @@ class RestaurantController extends Controller
         $menusCount = Cache::remember('menus.count', now()->addSeconds(30), function () {
             return Menu::where('restaurant_id', auth()->user()->id)->count();
         });
-        return view('dashboard.restaurant.dashboard', compact('reviewsCount', 'menusCount'));
+        
+        // Calculate sales data for charts
+        $restaurantId = auth()->user()->id;
+        
+        // Monthly sales (last 9 months)
+        $monthlySales = [];
+        for ($i = 8; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $sales = Order::where('restaurant_id', $restaurantId)
+                ->whereNull('error')
+                ->whereYear('created_at', $month->year)
+                ->whereMonth('created_at', $month->month)
+                ->sum('billing_total');
+            $monthlySales[] = round($sales, 2); // Keep actual dollar amount
+        }
+        
+        // Weekly sales (last 9 weeks)
+        $weeklySales = [];
+        for ($i = 8; $i >= 0; $i--) {
+            $weekStart = now()->subWeeks($i)->startOfWeek();
+            $weekEnd = now()->subWeeks($i)->endOfWeek();
+            $sales = Order::where('restaurant_id', $restaurantId)
+                ->whereNull('error')
+                ->whereBetween('created_at', [$weekStart, $weekEnd])
+                ->sum('billing_total');
+            $weeklySales[] = round($sales, 2); // Keep actual dollar amount
+        }
+        
+        // Total orders count
+        $totalOrders = Order::where('restaurant_id', $restaurantId)->count();
+        
+        // Monthly orders count (last 6 months for orders chart)
+        $monthlyOrders = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $count = Order::where('restaurant_id', $restaurantId)
+                ->whereNull('error')
+                ->whereYear('created_at', $month->year)
+                ->whereMonth('created_at', $month->month)
+                ->count();
+            $monthlyOrders[] = $count;
+        }
+        
+        return view('dashboard.restaurant.dashboard', compact(
+            'reviewsCount', 
+            'menusCount', 
+            'monthlySales', 
+            'weeklySales',
+            'totalOrders',
+            'monthlyOrders'
+        ));
     }
 
     public function management()

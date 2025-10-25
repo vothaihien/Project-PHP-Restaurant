@@ -16,16 +16,16 @@
                         <div class="col">
                             <ul class="nav nav-pills justify-content-end">
                                 <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales"
-                                    data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}'
-                                    data-prefix="$" data-suffix="k">
+                                    data-update='{"data":{"datasets":[{"data":{{ json_encode($monthlySales) }}}]}}'
+                                    data-prefix="$" data-suffix="">
                                     <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
                                         <span class="d-none d-md-block">Month</span>
                                         <span class="d-md-none">M</span>
                                     </a>
                                 </li>
                                 <li class="nav-item" data-toggle="chart" data-target="#chart-sales"
-                                    data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-                                    data-prefix="$" data-suffix="k">
+                                    data-update='{"data":{"datasets":[{"data":{{ json_encode($weeklySales) }}}]}}'
+                                    data-prefix="$" data-suffix="">
                                     <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
                                         <span class="d-none d-md-block">Week</span>
                                         <span class="d-md-none">W</span>
@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <!-- Chart -->
                     <div class="chart">
-                        <canvas id="chart-orders" class="chart-canvas"></canvas>
+                        <canvas id="chart-orders" class="chart-canvas" data-orders="{{ json_encode($monthlyOrders) }}"></canvas>
                     </div>
                 </div>
             </div>
@@ -298,6 +298,7 @@
 @endsection
 
 @push('js')
-<script src="{{ asset('dashboard/vendor/chart.js/dist/Chart.min.js') }}"></script>
-<script src="{{ asset('dashboard/vendor/chart.js/dist/Chart.extension.js') }}"></script>
+    <script src="{{ asset('dashboard/vendor/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('dashboard/vendor/chart.js/dist/Chart.extension.js') }}"></script>
+    <script src="{{ asset('dashboard/js/dashboard-charts.js') }}"></script>
 @endpush

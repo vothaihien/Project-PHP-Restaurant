@@ -30,7 +30,54 @@ class PigeonController extends Controller
         $restaurants = Cache::remember('restaurants.count', now()->addSeconds(30), function () {
             return Restaurant::all()->count();
         });
-        return view('dashboard.pigeon.dashboard', compact('users', 'restaurants', 'sales'));
+        
+        // Calculate sales data for charts (all restaurants combined)
+        
+        // Monthly sales (last 9 months)
+        $monthlySales = [];
+        for ($i = 8; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $monthSales = Order::whereNull('error')
+                ->whereYear('created_at', $month->year)
+                ->whereMonth('created_at', $month->month)
+                ->sum('billing_total');
+            $monthlySales[] = round($monthSales, 2); // Keep actual dollar amount
+        }
+        
+        // Weekly sales (last 9 weeks)
+        $weeklySales = [];
+        for ($i = 8; $i >= 0; $i--) {
+            $weekStart = now()->subWeeks($i)->startOfWeek();
+            $weekEnd = now()->subWeeks($i)->endOfWeek();
+            $weekSales = Order::whereNull('error')
+                ->whereBetween('created_at', [$weekStart, $weekEnd])
+                ->sum('billing_total');
+            $weeklySales[] = round($weekSales, 2); // Keep actual dollar amount
+        }
+        
+        // Total orders count
+        $totalOrders = Order::count();
+        
+        // Monthly orders count (last 6 months for orders chart)
+        $monthlyOrders = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $count = Order::whereNull('error')
+                ->whereYear('created_at', $month->year)
+                ->whereMonth('created_at', $month->month)
+                ->count();
+            $monthlyOrders[] = $count;
+        }
+        
+        return view('dashboard.pigeon.dashboard', compact(
+            'users', 
+            'restaurants', 
+            'sales',
+            'monthlySales',
+            'weeklySales',
+            'totalOrders',
+            'monthlyOrders'
+        ));
     }
 
     public function users()
