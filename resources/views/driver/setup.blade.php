@@ -13,20 +13,27 @@
                 @csrf
                 <h1 class="h2 mb-3 font-weight-normal">Enter Your Drivers License</h1>
 
-                @if($errors)
-                    @foreach ($errors->all() as $error)
-                        <div style="color: red">{{ $error }}</div>
-                    @endforeach
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
 
-                <input id="license_number" type="text" placeholder="License Number" class="form-control top @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" required autocomplete="license_number" autofocus>
-                <input id="dob" type="text" placeholder="Date of Birth" onfocus="(this.type='date')" class="form-control middle @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
-                <input id="reference_number" type="text" placeholder="Reference Number" class="form-control middle @error('reference_number') is-invalid @enderror" name="reference_number" value="{{ old('reference_number') }}" required autocomplete="reference_number" autofocus>
+                <input id="license_number" type="text" placeholder="License Number (5-20 characters)" class="form-control top @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" required autocomplete="license_number" maxlength="20">
+                
+                <input id="dob" type="date" placeholder="Date of Birth" max="{{ now()->subYears(18)->format('Y-m-d') }}" class="form-control middle @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob">
+                
+                <input id="reference_number" type="text" placeholder="Reference Number (5-15 characters)" class="form-control middle @error('reference_number') is-invalid @enderror" name="reference_number" value="{{ old('reference_number') }}" required autocomplete="reference_number" maxlength="15">
+                
                 <div class="input-group">
-                    <input id="valid_on" type="text" placeholder="Valid On" onfocus="(this.type='date')" class="form-control bottom @error('valid_on') is-invalid @enderror" name="valid_on" value="{{ old('valid_on') }}" required autocomplete="valid_on" autofocus>
-                    <input id="expires_on" type="text" placeholder="Expires On" onfocus="(this.type='date')" class="form-control bottom @error('expires_on') is-invalid @enderror" name="expires_on" value="{{ old('expires_on') }}" required autocomplete="expires_on" autofocus>
+                    <input id="valid_on" type="date" placeholder="Valid On" max="{{ date('Y-m-d') }}" class="form-control bottom @error('valid_on') is-invalid @enderror" name="valid_on" value="{{ old('valid_on') }}" required autocomplete="valid_on">
+                    <input id="expires_on" type="date" placeholder="Expires On" min="{{ date('Y-m-d') }}" class="form-control bottom @error('expires_on') is-invalid @enderror" name="expires_on" value="{{ old('expires_on') }}" required autocomplete="expires_on">
                 </div>
-                <button type="submit" class="btn btn-primary">{{ __('Save Drivers License') }}</button>
+                <button type="submit" class="btn btn-primary mt-3">{{ __('Save Drivers License') }}</button>
             </form>
         </div>
     </div>

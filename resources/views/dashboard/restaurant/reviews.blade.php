@@ -35,7 +35,7 @@
                 <div class="card shadow">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Rating: <span class="{{ App\Review::getAvgColor($avgRating) }}"
+                        <h3 class="mb-0">Rating: <span class="{{ App\Models\Review::getAvgColor($avgRating) }}"
                                 style="font-size: large">{{ $avgRating }}</span></h3>
                     </div>
                     <!-- Table -->

@@ -23,12 +23,14 @@ class DriversLicenseRequest extends FormRequest
      */
     public function rules()
     {
+        $eighteenYearsAgo = now()->subYears(18)->format('Y-m-d');
+        
         return [
-            'license_number' => 'required|alpha_dash|size:15',
-            'reference_number' => 'required|alpha_num|size:9',
-            'dob' => 'required|date|before:21 years ago',
-            'valid_on' => 'required|date|before:today|after:dob',
-            'expires_on' => 'required|date|after:today'
+            'license_number' => 'required|string|min:5|max:20',
+            'reference_number' => 'required|string|min:5|max:15',
+            'dob' => 'required|date|before_or_equal:' . $eighteenYearsAgo,
+            'valid_on' => 'required|date|before_or_equal:today',
+            'expires_on' => 'required|date|after_or_equal:today'
         ];
     }
 
@@ -36,10 +38,14 @@ class DriversLicenseRequest extends FormRequest
     {
         return [
             'license_number.required' => 'We need your Drivers License number.',
+            'license_number.min' => 'License number must be at least 5 characters.',
+            'license_number.max' => 'License number cannot exceed 20 characters.',
             'reference_number.required' => 'We need your Drivers License Reference number.',
-            'valid_on.before' => 'The valid on date should be in the past.',
-            'valid_on.after' => 'Unrealistic Valid On date.',
-            'expires_on.after' => 'The expiration date needs to be in the future.'
+            'reference_number.min' => 'Reference number must be at least 5 characters.',
+            'reference_number.max' => 'Reference number cannot exceed 15 characters.',
+            'dob.before' => 'You must be at least 18 years old.',
+            'valid_on.before_or_equal' => 'The valid on date should be today or in the past.',
+            'expires_on.after_or_equal' => 'The expiration date needs to be today or in the future.'
         ];
     }
 }

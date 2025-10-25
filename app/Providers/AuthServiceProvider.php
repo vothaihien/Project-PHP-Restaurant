@@ -32,16 +32,25 @@ class AuthServiceProvider extends ServiceProvider
                : Response::deny('You must be a super admin.');
         });
 
-        Gate::define('license-is-created', function ($driver) {
-            return $driver->drivers_license
-                ? Response::allow()
-                : Response::deny('You must add your drivers license.');
+        Gate::define('license-is-created', function ($user) {
+            if (!$user->relationLoaded('drivers_license')) {
+                $user->load('drivers_license');
+            }
+            return $user->drivers_license !== null;
         });
 
-        Gate::define('driver-can-reserve', function ($driver) {
-            return $driver->reserved_order->first()
-                ? Response::deny('You must add your drivers license.')
-                : Response::allow();
+        Gate::define('driver-can-reserve', function ($user) {
+            if (!$user->relationLoaded('reserved_order')) {
+                $user->load('reserved_order');
+            }
+            return !$user->reserved_order->first();
+        });
+        
+        Gate::define('driver-has-vehicle', function ($user) {
+            if (!$user->relationLoaded('vehicle')) {
+                $user->load('vehicle');
+            }
+            return $user->vehicle !== null;
         });
     }
 }

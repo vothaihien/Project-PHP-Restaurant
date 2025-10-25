@@ -11,7 +11,7 @@ use App\Models\OrderStatus;
 use App\Models\RestaurantHours;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use App\Http\Requests\SetOperatingHoursRequest;
 
 class RestaurantController extends Controller
@@ -83,9 +83,22 @@ class RestaurantController extends Controller
         ]);
 
         if (isset($data['image'])) {
-            $imagePath = $data['image']->store('uploads/menu/' . auth()->user()->id, 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-            $image->save();
+            // Process image before storing
+            $image = Image::read($data['image'])
+                ->cover(1200, 1200);
+            
+            // Generate unique filename
+            $filename = uniqid() . '.' . $data['image']->getClientOriginalExtension();
+            $imagePath = 'uploads/menu/' . auth()->user()->id . '/' . $filename;
+            
+            // Ensure directory exists
+            $directory = storage_path('app/public/uploads/menu/' . auth()->user()->id);
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+            
+            // Save processed image
+            $image->save(storage_path('app/public/' . $imagePath));
         } else {
             $imagePath = null;
         }
@@ -113,12 +126,27 @@ class RestaurantController extends Controller
         ]);
 
         if (isset($data['image'])) {
+            // Delete old image if exists
             if (File::exists(public_path('storage/' . $menu->image))) {
                 File::delete(public_path('storage/' . $menu->image));
             }
-            $imagePath = $data['image']->store('uploads/menu/' . auth()->user()->id, 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-            $image->save();
+            
+            // Process image before storing
+            $image = Image::read($data['image'])
+                ->cover(1200, 1200);
+            
+            // Generate unique filename
+            $filename = uniqid() . '.' . $data['image']->getClientOriginalExtension();
+            $imagePath = 'uploads/menu/' . auth()->user()->id . '/' . $filename;
+            
+            // Ensure directory exists
+            $directory = storage_path('app/public/uploads/menu/' . auth()->user()->id);
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+            
+            // Save processed image
+            $image->save(storage_path('app/public/' . $imagePath));
         } else {
             if (isset($menu->image)) {
                 $imagePath = $menu->image;
@@ -191,9 +219,16 @@ class RestaurantController extends Controller
             File::delete(public_path('storage/' . $currentUser->image));
         }
 
-        $imagePath = $data['image']->store('uploads', 'public');
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-        $image->save();
+        // Process image before storing
+        $image = Image::read($data['image'])
+            ->cover(1200, 1200);
+        
+        // Generate unique filename
+        $filename = uniqid() . '.' . $data['image']->getClientOriginalExtension();
+        $imagePath = 'uploads/' . $filename;
+        
+        // Save processed image
+        $image->save(storage_path('app/public/' . $imagePath));
 
         Restaurant::findOrFail($currentUser->id)->update([
             'image' => $imagePath
@@ -234,13 +269,21 @@ class RestaurantController extends Controller
 
     public function completeOrder(Order $order)
     {
-        OrderStatus::create(['order_id' => $order->id, 'status' => 'food_ready_for_pickup']);
+        OrderStatus::create([
+            'order_id' => $order->id,
+            'status' => 'food_ready_for_pickup',
+            'created_at' => now()
+        ]);
         return redirect()->back();
     }
 
     public function cancelOrder(Order $order)
     {
-        OrderStatus::create(['order_id' => $order->id, 'status' => 'cancelled']);
+        OrderStatus::create([
+            'order_id' => $order->id,
+            'status' => 'cancelled',
+            'created_at' => now()
+        ]);
         return redirect()->back();
     }
 }
