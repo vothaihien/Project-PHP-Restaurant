@@ -47,22 +47,39 @@
 @section('extra-js')
     <script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoia25pZmVib3NzIiwiYSI6ImNrOWlyazllcTE1NmQzZXBuZXh5MHVpM3QifQ.eNaU-QnXEbcFzghOYUGVvA';
+        
+        // Tọa độ TP.Hồ Chí Minh (trung tâm)
+        var hcmCenter = [106.6975, 10.7758];
+        
+        // Tọa độ restaurant (pickup location)
+        var restaurantCoords = [{{ $order->restaurant->address->longitude ?? 106.6975 }}, {{ $order->restaurant->address->latitude ?? 10.7758 }}];
+        
+        // Tọa độ delivery (customer address)
+        var deliveryCoords = [{{ $order->address->longitude ?? 106.6975 }}, {{ $order->address->latitude ?? 10.7758 }}];
+        
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-73.65, 45.5087],
+            center: hcmCenter,
             zoom: 13
         });
+        
         var directions = new MapboxDirections({
                 accessToken: mapboxgl.accessToken,
                 unit: 'metric',
         });
-        directions.setOrigin([-73.65, 45.5087]);
+        
+        // Driver's current location (có thể thay bằng GPS thực tế)
+        directions.setOrigin(hcmCenter);
+        
         @if($order->status->first()->status === 'reserved')
-            directions.setDestination([-73.65654, 45.5087564]);
+            // Đang đi lấy đồ ăn tại restaurant
+            directions.setDestination(restaurantCoords);
         @else
-            directions.setDestination(['{{ $order->address->longitude }}', '{{ $order->address->latitude }}']);
+            // Đang giao đồ ăn cho khách hàng
+            directions.setDestination(deliveryCoords);
         @endif
+        
         map.addControl(
             directions,
             'top-left',

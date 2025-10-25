@@ -30,10 +30,10 @@ class CheckoutController extends Controller
             'order' => 1
         ));
         $tax_condition = new CartCondition(array(
-            'name' => 'GST/QST 14.975%',
+            'name' => 'VAT 10%',
             'type' => 'tax',
             'target' => 'total',
-            'value' => '14.975%',
+            'value' => '10%',
             'order' => 2
         ));
         $tip = new CartCondition(array(
@@ -150,6 +150,7 @@ class CheckoutController extends Controller
                         'country' => $sessionAddress['context']['country'] ?? '',
                         'longitude' => $sessionAddress['coordinates'][0] ?? null,
                         'latitude' => $sessionAddress['coordinates'][1] ?? null,
+                        'added_on' => now(),
                     ];
                 } else {
                     $addressData += [
@@ -161,6 +162,7 @@ class CheckoutController extends Controller
                         'country' => $sessionAddress['context']['country'] ?? '',
                         'longitude' => $sessionAddress['coordinates'][0] ?? null,
                         'latitude' => $sessionAddress['coordinates'][1] ?? null,
+                        'added_on' => now(),
                     ];
                 }
 
@@ -186,7 +188,7 @@ class CheckoutController extends Controller
             'total_items_qty' => $cart->getTotalQuantity(),
             'billing_subtotal' => $cart->getSubtotal(),
             'billing_delivery' => $cart->getCondition('Delivery Fee')->getValue(),
-            'billing_tax' => number_format($cart->getCondition('GST/QST 14.975%')->getCalculatedValue($cart->getSubTotal()), 2, '.', ','),
+            'billing_tax' => number_format($cart->getCondition('VAT 10%')->getCalculatedValue($cart->getSubTotal()), 2, '.', ','),
             'driver_tip' => number_format($cart->getCondition('Tip')->getValue(), 2, '.', ','),
             'billing_total' => $cart->getTotal(),
             'payment_status' => 'pending'

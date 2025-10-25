@@ -51,7 +51,9 @@ class DriverController extends Controller
     public function vehicle()
     {
         if (auth()->user()->vehicle) {
-            return view('driver.driver');
+            $reserved = Order::getDriverReserved()->first();
+            $orders = Order::getAvailableOrders()->get();
+            return view('driver.driver', compact('orders', 'reserved'));
         }
         $types = ['Automobile', 'Motorcycle', 'Scooter', 'Moped'];
         return view('driver.vehicle', compact('types'));
@@ -130,8 +132,9 @@ class DriverController extends Controller
             'status' => 'delivered',
             'created_at' => now()
         ]);
-        $restaurant_address = $order->fullAddress();
-        return view('driver.order', compact('order', 'restaurant_address'));
+        
+        // Redirect về driver dashboard để nhận đơn mới
+        return redirect()->route('driver.index')->with('success', 'Order delivered successfully! You can now pick up new orders.');
     }
 
     public function storeDriversLicense(DriversLicenseRequest $request)
