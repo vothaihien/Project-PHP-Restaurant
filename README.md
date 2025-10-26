@@ -106,7 +106,7 @@ composer install
 ### 3. Install Node Dependencies
 
 ```bash
-npm install
+npm install --force
 ```
 
 ### 4. Create Environment File
