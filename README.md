@@ -142,7 +142,7 @@ Edit `.env` file:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=pigeon_db
+DB_DATABASE=pigeon
 DB_USERNAME=root
 DB_PASSWORD=your_password
 ```
@@ -194,7 +194,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 **For MySQL:**
 ```bash
 mysql -u root -p
-CREATE DATABASE pigeon_db;
+CREATE DATABASE pigeon;
 EXIT;
 ```
 
