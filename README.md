@@ -93,8 +93,8 @@ A comprehensive food delivery platform built with Laravel, featuring separate da
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/pigeon-food-delivery.git
-cd pigeon-food-delivery
+git clone https://github.com/vothaihien/Project-PHP-Restaurant.git
+cd Project-PHP-Restaurant
 ```
 
 ### 2. Install PHP Dependencies
