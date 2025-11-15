@@ -25,7 +25,7 @@
             <div class="header-body">
                 <div class="row">
                     <div class="col-md-12 {{ $class ?? '' }}">
-                        <h1 class="display-2 text-white">Menu</h1>
+                        <h1 class="display-2 text-white">Thực đơn</h1>
                     </div>
                 </div>
                 <div class="row align-items-center">
@@ -33,14 +33,14 @@
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Restaurant</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Menu</li>
+                                <li class="breadcrumb-item"><a href="#">Nhà hàng</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Thực đơn</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="{{ route('restaurant.newMenuItem') }}" class="btn btn-sm btn-neutral">New</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        <a href="{{ route('restaurant.newMenuItem') }}" class="btn btn-sm btn-neutral">Mới</a>
+                        <a href="#" class="btn btn-sm btn-neutral">Lọc</a>
                     </div>
                 </div>
                 @if (Session::has('success'))
@@ -66,17 +66,17 @@
                 <div class="card shadow">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">{{auth()->user()->name}} Menu</h3>
+                        <h3 class="mb-0">Thực đơn {{auth()->user()->name}}</h3>
                     </div>
                     <!-- Table -->
                     <div class="table-responsive" data-toggle="list" data-list-values='["name", "description", "price", "category"]'>
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="sort" data-sort="name">Item Name</th>
-                                    <th scope="col" class="sort" data-sort="description">Description</th>
-                                    <th scope="col" class="sort" data-sort="price">Price</th>
-                                    <th scope="col" class="sort" data-sort="category">Category</th>
+                                    <th scope="col" class="sort" data-sort="name">Tên món</th>
+                                    <th scope="col" class="sort" data-sort="description">Mô tả</th>
+                                    <th scope="col" class="sort" data-sort="price">Giá</th>
+                                    <th scope="col" class="sort" data-sort="category">Danh mục</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>

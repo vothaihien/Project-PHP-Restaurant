@@ -16,7 +16,7 @@
 @section('content')
 <div class="container pt-4">
     <div class="row mb-4">
-        <h1>Complete Your Order</h1>
+        <h1>Hoàn tất đơn hàng</h1>
     </div>
     <div class="row">
         <div class="col-md-8">
@@ -55,19 +55,19 @@
                 @endforeach
             </div>
             <div class="row mt-5">
-                <label for="card-element" style="font-size: 1.5rem">Address</label>
+                <label for="card-element" style="font-size: 1.5rem">Địa chỉ</label>
                 @if(\Session::has('address'))
                     <div id="mapbox" data-lng="{{ \Session::get('address.coordinates.0', '106.6975') }}" data-lat="{{ \Session::get('address.coordinates.1', '10.7758') }}" class="checkout-map" ></div>
                 @endif
                 <div class="address payment">
                     <h5 class="d-inline-block mb-0">{{ substr(\Session::get('address.place_name', ''),0,strrpos(\Session::get('address.place_name', ''),',')) }}</h5>
-                    <a class="change-address @if(!\Session::has('address')) pl-0 @endif" data-toggle="modal" data-target="#changeAddressModal">{{ \Session::has('address') ? 'Change' : 'Choose Delivery Address'}}</a>
+                    <a class="change-address @if(!\Session::has('address')) pl-0 @endif" data-toggle="modal" data-target="#changeAddressModal">{{ \Session::has('address') ? 'Thay đổi' : 'Chọn địa chỉ giao hàng' }}</a>
                 </div>
                 <div class="modal fade" id="changeAddressModal" tabindex="-1" role="dialog" aria-labelledby="changeAddressModalTitle" aria-hidden="true">
                     <div class="modal-dialog" style="top:200px" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="changeAddressModalLongTitle"><i class="fas fa-car"></i> Delivery Address</h4>
+                                <h4 class="modal-title" id="changeAddressModalLongTitle"><i class="fas fa-car"></i> Địa chỉ giao hàng</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -84,14 +84,14 @@
                 <form action="{{ route('checkout.store', $restaurant->slug) }}" method="POST" id="payment-form" class="payment">
                     @csrf
                     <div class="form-group">
-                        <label for="card-element">Payment</label>
+                        <label for="card-element">Thanh toán</label>
                         <div id="card-element">
                             <!-- A Stripe Element will be inserted here. -->
                         </div>
                         <div id="card-errors" role="alert"></div>
                     </div>
 
-                    <button class="btn btn-primary">{{ __('Place Order') }}</button>
+                    <button class="btn btn-primary">Đặt hàng</button>
                 </form>
             </div>
         </div>
@@ -101,17 +101,17 @@
                     <img class="r-header__image" src="{{ url('storage/'.$restaurant->image) }}" alt="">
                 </a>
                 <div class="r-header__name">
-                    <h5>Order From</h5>
+                    <h5>Đặt hàng từ</h5>
                     <h3>{{ $restaurant->name }}</h3>
                 </div>
             </div>
             <hr>
             <div class="m-row">
-                <h5>Subtotal: </h5><h5>${{ \Cart::getSubTotal() }}</h5>
+                <h5>Tạm tính: </h5><h5>${{ \Cart::getSubTotal() }}</h5>
             </div>
             <div class="m-row mt-1">
-                <h5>Delivery Fee: </h5>
-                <h5>{{ $restaurant->delivery_fee == 0.00 ? 'Free' : '$'.\Cart::getCondition('Delivery Fee')->getValue() }}</h5>
+                <h5>Phí giao hàng: </h5>
+                <h5>{{ $restaurant->delivery_fee == 0.00 ? 'Miễn phí' : '$'.\Cart::getCondition('Delivery Fee')->getValue() }}</h5>
             </div>
             <div class="m-row mt-1">
                 <h5>VAT (10%): </h5>
@@ -121,7 +121,7 @@
             <div class=" m-row">
                 <div class="col p-0">
                     <div class="m-row no-gutters">
-                        <h5 class="m-0">Tip:</h5>
+                        <h5 class="m-0">Tiền tip:</h5>
                         <h5 style="text-align: right;">${{ \Cart::getCondition('Tip') ? number_format(\Cart::getCondition('Tip')->getValue(), 2, '.', ',') : '0.00'}}</h5>
                     </div>
                     <div class="row no-gutters mt-2" style="width: 100%;">
@@ -132,7 +132,7 @@
                                 <button name="tip" value="3.00" id="threeDollarTip" onclick="this.blur();" style="float:right;border-radius:0px;"class="btn tip-btn">$3.00</button>
                                 <button name="tip" value="4.00" id="fourDollarTip" onclick="this.blur();" style="float:right;border-radius:0px;"class="btn tip-btn">$4.00</button>
                             </form>
-                            <button id="otherTipBtn" onclick="this.blur();" style="float:right;border-bottom-left-radius:0px;border-top-left-radius: 0px; border-bottom-right-radius: 25px; border-top-right-radius: 25px;" class="btn tip-btn">other</button>
+                            <button id="otherTipBtn" onclick="this.blur();" style="float:right;border-bottom-left-radius:0px;border-top-left-radius: 0px; border-bottom-right-radius: 25px; border-top-right-radius: 25px;" class="btn tip-btn">Khác</button>
                         </div>
                     </div>
                     <div  id="otherTipInput" class="row no-gutters mt-2" style="display:none;justify-content: center;">
@@ -144,7 +144,7 @@
                                 </div>
                                 <input step=".01" name="tip" value="0.00" type="number" min="0" max="500" class="form-control">
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary tip-submit" onclick="this.blur();" type="submit">submit</button>
+                                    <button class="btn btn-secondary tip-submit" onclick="this.blur();" type="submit">Gửi</button>
                                 </div>
                             </div>
                         </form>
@@ -156,10 +156,10 @@
             </div>
             <hr>
             <div class="m-row mt-1">
-                <h3>Total:</h3>
+                <h3>Tổng cộng:</h3>
                 <h3>${{ \Cart::getTotal() }}</h3>
             </div>
-            <button class="btn btn-primary btn-block" form="payment-form">{{ __('Place Order') }}</button>
+            <button class="btn btn-primary btn-block" form="payment-form">Đặt hàng</button>
         </div>
     </div>
 </div>

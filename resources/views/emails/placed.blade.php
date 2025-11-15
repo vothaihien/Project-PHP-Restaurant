@@ -1,23 +1,23 @@
 @component('mail::message')
-# Order Received
+# Đơn hàng đã được nhận
 
-Thank you {{ auth()->user()->name }} for your order.
+Cảm ơn {{ auth()->user()->name }} đã đặt hàng.
 
-**Order ID:** {{ $order->id }}<br>
-**Order Total:** ${{ $order->billing_total }}<br>
+**Mã đơn hàng:** {{ $order->id }}<br>
+**Tổng tiền:** ${{ $order->billing_total }}<br>
 
-**Items Ordered:**<br>
+**Các món đã đặt:**<br>
 @foreach ($order->menu_items as $menu)
 * {{ $menu->name }} <br>
-Price: ${{ $menu->price }} <br>
-Quantity: {{ $menu->pivot->quantity }} <br><br>
+Giá: ${{ $menu->price }} <br>
+Số lượng: {{ $menu->pivot->quantity }} <br><br>
 @endforeach
 
-You can get further details about your order by logging into our website.
+Bạn có thể xem thêm chi tiết đơn hàng bằng cách đăng nhập vào website của chúng tôi.
 @component('mail::button', ['url' => config('app.url'), 'color' => 'green'])
-Go to Website
+Truy cập Website
 @endcomponent
 
-Regards,<br/>
-Kevin Malone
+Trân trọng,<br/>
+Đội ngũ Pigeon
 @endcomponent

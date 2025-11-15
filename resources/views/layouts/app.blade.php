@@ -21,6 +21,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('dashboard/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
@@ -35,7 +37,7 @@
             <div class="container">
                 @if(Request::is('r/*'))
                     <a href="{{ URL::previous() }}" class="back pr-4" style="margin-left: -15px"><i
-                            class="fas fa-chevron-circle-left"></i> Back</a>
+                            class="fas fa-chevron-circle-left"></i> Quay lại</a>
                 @endif
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('/svg/dove.svg') }}" style="height: 30px; width: 30px">
@@ -43,7 +45,7 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
+                    aria-label="Chuyển đổi điều hướng">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -61,7 +63,7 @@
                     <ul class="navbar-nav ml-auto">
                         @if(Request::is('r/*') && !Request::is('r/*/checkout'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('checkout', $restaurant->slug) }}" title="Order Basket">
+                                <a class="nav-link" href="{{ route('checkout', $restaurant->slug) }}" title="Giỏ hàng">
                                     <i class="fas fa-shopping-basket"></i>
                                     @if(!\Cart::isEmpty())
                                         <span class="badge badge-info">{{ \Cart::getTotalQuantity() }}</span>
@@ -72,22 +74,26 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">
+                                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                                </a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">
+                                        <i class="fas fa-user-plus"></i> Đăng ký
+                                    </a>
                                 </li>
                             @endif
                         @else
                             @if(auth()->guard('web')->check())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('user.orders') }}" title="Your Orders"><i
+                                <a class="nav-link" href="{{ route('user.orders') }}" title="Đơn hàng của bạn"><i
                                             class="fas fa-receipt"></i></a>
-                                </li>
+                            </li>
                             @elseif(auth()->guard('driver')->check())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('driver.trips') }}" title="Your Trips"><i
+                                    <a class="nav-link" href="{{ route('driver.trips') }}" title="Chuyến đi của bạn"><i
                                             class="fas fa-route"></i></a>
                                 </li>
                             @endif
@@ -99,12 +105,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">
-                                        {{ __('Settings') }}
+                                        Cài đặt
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Đăng xuất
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">

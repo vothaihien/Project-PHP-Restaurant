@@ -7,20 +7,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
+                <div class="card-header">{{ isset($url) ? ucwords($url) : ""}} Đăng nhập</div>
 
                 <div class="card-body">
                     @isset($url)
-                        <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+                        <form method="POST" action='{{ url("login/$url") }}' aria-label="Đăng nhập">
                     @else
                         {{ $url = '' }}
-                        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                        <form method="POST" action="{{ route('login') }}" aria-label="Đăng nhập">
                     @endisset
                         @csrf
 
                         @if ($url === 'pigeon')
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                <label for="username" class="col-md-4 col-form-label text-md-right">Tên người dùng</label>
 
                                 <div class="col-md-6">
                                     <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
@@ -34,7 +34,7 @@
                             </div>
                         @else
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">Địa chỉ email</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -49,7 +49,7 @@
                         @endif
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -68,7 +68,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        Ghi nhớ đăng nhập
                                     </label>
                                 </div>
                             </div>
@@ -77,12 +77,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    Đăng nhập
                                 </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        Quên mật khẩu?
                                     </a>
                                 @endif
                             </div>

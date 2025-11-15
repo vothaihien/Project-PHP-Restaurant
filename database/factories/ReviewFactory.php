@@ -34,11 +34,30 @@ class ReviewFactory extends Factory
 
     public function definition(): array
     {
+        // Các comment mẫu tiếng Việt
+        $comments = [
+            'Nhà hàng rất tốt, đồ ăn ngon và phục vụ nhiệt tình.',
+            'Món ăn đậm đà, giá cả hợp lý, sẽ quay lại lần sau.',
+            'Không gian đẹp, thức ăn tươi ngon, nhân viên thân thiện.',
+            'Đồ ăn được chế biến cẩn thận, hương vị tuyệt vời.',
+            'Nhà hàng sạch sẽ, món ăn đa dạng, rất đáng để thử.',
+            'Chất lượng tốt, giá cả phải chăng, giao hàng nhanh.',
+            'Món ăn ngon miệng, phục vụ chuyên nghiệp, rất hài lòng.',
+            'Thức ăn tươi ngon, không gian thoải mái, sẽ giới thiệu cho bạn bè.',
+            'Nhà hàng có nhiều món đặc sắc, hương vị đậm đà.',
+            'Dịch vụ tốt, đồ ăn chất lượng, giá cả hợp lý.',
+            'Món ăn được trình bày đẹp mắt, hương vị tuyệt vời.',
+            'Nhà hàng có không gian rộng rãi, phù hợp cho gia đình.',
+            'Đồ ăn nóng hổi, thơm ngon, phục vụ nhanh chóng.',
+            'Chất lượng món ăn tốt, giá cả phải chăng.',
+            'Nhà hàng có nhiều lựa chọn, món nào cũng ngon.',
+        ];
+        
         return [
             'user_id' => $this->faker->numberBetween(1, 30),
             'restaurant_id' => $this->faker->numberBetween(1, 40),
             'rating' => $this->faker->numberBetween(2, 5),
-            'comment' => $this->faker->sentence(6, true),
+            'comment' => $this->faker->randomElement($comments),
             'created_at' => now(),
         ];
     }

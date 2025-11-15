@@ -1,5 +1,5 @@
 <div class="restaurant-cart">
-    <h3 class="mb-0">Your Order</h3>
+    <h3 class="mb-0">Đơn hàng của bạn</h3>
     <hr>
     <ul class="list-group" style="list-style: none">
         @foreach(\Cart::session($restaurant->id)->getContent() as $item)
@@ -15,14 +15,14 @@
         @endforeach
     </ul>
     @if(!\Cart::isEmpty())
-        <p class="pt-3"><b>Subtotal:</b><span class="float-right">${{ \Cart::getSubTotal() }}</span></p>
+        <p class="pt-3"><b>Tạm tính:</b><span class="float-right">${{ \Cart::getSubTotal() }}</span></p>
         @if(\App\Models\RestaurantHours::isOpen($restaurant->id))
-            <a href="{{ route('checkout', $restaurant->slug) }}" class="btn btn-info btn-block">Checkout</a>
+            <a href="{{ route('checkout', $restaurant->slug) }}" class="btn btn-info btn-block">Thanh toán</a>
         @else
-            <button type="button" class="btn btn-secondary btn-block" disabled>Restaurant is Closed</button>
+            <button type="button" class="btn btn-secondary btn-block" disabled>Nhà hàng đã đóng cửa</button>
         @endif
     @else
-        <p>Start adding items from the menu to build your order.</p>
+        <p>Bắt đầu thêm món từ menu để tạo đơn hàng.</p>
     @endif
 </div>
 

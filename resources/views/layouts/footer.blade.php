@@ -5,25 +5,25 @@
             <small class="d-block mb-3 text-muted">© {{ now()->year }}</small>
         </div>
         <div class="col-6 col-md">
-            <h5>Drivers</h5>
+            <h5>Tài xế</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="{{route('login.driver')}}">Driver Login</a></li>
-                <li><a class="text-muted" href="{{route('register.driver')}}">Drive with us</a></li>
-                <li><a class="text-muted" href="#">Team feature</a></li>
-                <li><a class="text-muted" href="#">Driver Support</a></li>
+                <li><a class="text-muted" href="{{route('login.driver')}}">Đăng nhập tài xế</a></li>
+                <li><a class="text-muted" href="{{route('register.driver')}}">Lái xe cùng chúng tôi</a></li>
+                <li><a class="text-muted" href="#">Tính năng nhóm</a></li>
+                <li><a class="text-muted" href="#">Hỗ trợ tài xế</a></li>
             </ul>
         </div>
         <div class="col-6 col-md">
-            <h5>Restaurants</h5>
+            <h5>Nhà hàng</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="{{route('login.restaurant')}}">Restaurant Login</a></li>
-                <li><a class="text-muted" href="{{route('register.restaurant')}}">Partner with us</a></li>
-                <li><a class="text-muted" href="#">Advantages</a></li>
-                <li><a class="text-muted" href="#">Restaurant Support</a></li>
+                <li><a class="text-muted" href="{{route('login.restaurant')}}">Đăng nhập nhà hàng</a></li>
+                <li><a class="text-muted" href="{{route('register.restaurant')}}">Đối tác với chúng tôi</a></li>
+                <li><a class="text-muted" href="#">Ưu đãi</a></li>
+                <li><a class="text-muted" href="#">Hỗ trợ nhà hàng</a></li>
             </ul>
         </div>
         <div class="col-6 col-md">
-            <h5>Locations</h5>
+            <h5>Địa điểm</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="text-muted" href="{{ route('home.index') }}">Quận 1</a></li>
                 <li><a class="text-muted" href="#">Quận 3</a></li>
@@ -32,12 +32,12 @@
             </ul>
         </div>
         <div class="col-6 col-md">
-            <h5>About Us</h5>
+            <h5>Về chúng tôi</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">The Team</a></li>
-                <li><a class="text-muted" href="#">Jobs</a></li>
-                <li><a class="text-muted" href="{{ route('privacy') }}">Privacy</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
+                <li><a class="text-muted" href="#">Đội ngũ</a></li>
+                <li><a class="text-muted" href="#">Tuyển dụng</a></li>
+                <li><a class="text-muted" href="{{ route('privacy') }}">Bảo mật</a></li>
+                <li><a class="text-muted" href="#">Điều khoản</a></li>
             </ul>
         </div>
     </div>

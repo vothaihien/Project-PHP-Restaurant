@@ -17,7 +17,7 @@ class CartController extends Controller
     public function store(Menu $menu)
     {
         if (!$menu->available) {
-            return redirect()->back()->with('error', 'Item Unavailable');
+            return redirect()->back()->with('error', 'Món không có sẵn');
         }
 
         $data = request()->validate([

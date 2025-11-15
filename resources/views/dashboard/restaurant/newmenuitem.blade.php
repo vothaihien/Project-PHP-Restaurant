@@ -4,7 +4,7 @@
     <script>
         $(document).ready(function () {
             $('#categories').select2({
-                placeholder: "Choose a category"
+                placeholder: "Chọn danh mục"
             });
         });
     </script>
@@ -25,7 +25,7 @@
             <div class="header-body">
                 <div class="row">
                     <div class="col-md-12 {{ $class ?? '' }}">
-                        <h1 class="display-2 text-white">New Menu Item</h1>
+                        <h1 class="display-2 text-white">Món mới</h1>
                     </div>
                 </div>
                 <div class="row align-items-center">
@@ -33,9 +33,9 @@
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Restaurant</a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('restaurant.menu') }}">Menu</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">New</li>
+                                <li class="breadcrumb-item"><a href="#">Nhà hàng</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('restaurant.menu') }}">Thực đơn</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Mới</li>
                             </ol>
                         </nav>
                     </div>
@@ -50,14 +50,14 @@
                 <div class="card shadow">
                     <!-- Card header -->
                     <div class="card-header">
-                        <h3 class="mb-0">Create a new menu item</h3>
+                        <h3 class="mb-0">Tạo món mới</h3>
                     </div>
                     <div class="card-body" >
                         <form method="POST" action="{{route('restaurant.createMenuItem')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label class="col-form-label" for="name">Item Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Item Name" id="name" required>
+                                <label class="col-form-label" for="name">Tên món</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Tên món" id="name" required>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-control-label" for="description">Item Description</label>
+                                <label class="form-control-label" for="description">Mô tả</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" rows="2" resize="none"></textarea>
 
                                 @error('description')
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="custom-file mb-4" style="height: auto">
-                                <label class="custom-file-label" for="image">Choose an optional menu image</label>
+                                <label class="custom-file-label" for="image">Chọn hình ảnh món (tùy chọn)</label>
                                 <input type="file" class="custom-file-input" id="image" name="image">
 
                                 @error('image')
@@ -91,7 +91,7 @@
                             <div class="form-row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="price">Price</label>
+                                        <label class="control-label" for="price">Giá</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
@@ -109,7 +109,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="control-label">Category</label>
+                                        <label class="control-label">Danh mục</label>
                                         <div class="input-group" >
                                             <select id="categories" class="form-control" name="category_id" style="width: 100%" required>
                                                 <option></option>
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">{{ __('Add to restaurant menu') }}</button>
+                            <button type="submit" class="btn btn-primary">Thêm vào thực đơn nhà hàng</button>
                         </form>
                     </div>
                 </div>

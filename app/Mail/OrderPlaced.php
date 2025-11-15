@@ -32,7 +32,7 @@ class OrderPlaced extends Mailable
     {
         return $this->from('no-reply@whypigeonswhy.com', 'Pigeon')
                     ->to(auth()->user()->email, auth()->user()->name)
-                    ->subject('Food and maybe some Pigeons Order')
+                    ->subject('Đơn hàng từ Food and Maybe Pigeons')
                     ->markdown('emails.placed');
     }
 }

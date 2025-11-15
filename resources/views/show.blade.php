@@ -12,7 +12,7 @@
                     <h1 class="m-0 my-auto">{{ $restaurant->name }}</h1>
                     <p class="lead ml-5 mb-0 my-auto"><span class="badge badge-rating">{{ $rating }}</span></p>
                     <p class="h5 ml-3 mb-0 my-auto"><span
-                            class="badge badge-delivery">{{ $restaurant->delivery_fee == 0.00 ? 'Free Delivery' : '$' . $restaurant->delivery_fee . ' Delivery' }}</span>
+                            class="badge badge-delivery">{{ $restaurant->delivery_fee == 0.00 ? 'Miễn phí giao hàng' : '$' . $restaurant->delivery_fee . ' Phí giao hàng' }}</span>
                     </p>
                     <p class="h5 ml-3 mb-0 my-auto"><span
                             class="badge badge-price">{{ $restaurant->categories->first()->name }}</span></p>
@@ -26,17 +26,17 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h6 class="modal-title" id="modal-title-default">More Info</h6>
+                                        <h6 class="modal-title" id="modal-title-default">Thông tin thêm</h6>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     <div class="modal-body text-center">
                                         @if(\App\Models\RestaurantHours::hoursExist($restaurant->id))
-                                            <h3><i class="fa fa-clock"></i> {{ __('Today\'s Hours') }}</h3>
+                                            <h3><i class="fa fa-clock"></i> Giờ mở cửa hôm nay</h3>
                                             <p>{{ \App\Models\RestaurantHours::displayHours($restaurant->id) }}</p>
                                         @endif
-                                        <h3><i class="fa fa-map-marker-alt"></i> Address</h3>
+                                        <h3><i class="fa fa-map-marker-alt"></i> Địa chỉ</h3>
                                         <p class="mb-0">{{$restaurant->address->street_address}},
                                             {{$restaurant->address->city}}</p>
                                         <p>{{$restaurant->address->province}}, {{$restaurant->address->country}}
@@ -106,7 +106,7 @@
                                                                 <p>{{$menu->description}}</p>
                                                                 <div class="form-group">
                                                                     <textarea class="form-control instructions"
-                                                                        placeholder="Add special instructions for the restaurant" rows="1"
+                                                                        placeholder="Thêm ghi chú đặc biệt cho nhà hàng" rows="1"
                                                                         name="instructions" id="instructions" maxlength="255"></textarea>
                                                                 </div>
                                                                 <div class="center-block">
@@ -115,8 +115,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer p-0">
-                                                                <button type="submit" class="btn btn-success btn-block">Add To
-                                                                    Order</button>
+                                                                <button type="submit" class="btn btn-success btn-block">Thêm vào
+                                                                    đơn hàng</button>
                                                             </div>
                                                         </form>
                                                     </div>

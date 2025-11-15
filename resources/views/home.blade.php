@@ -30,9 +30,9 @@
             @else
             <form action="{{ route('home.index', ['search' => 'search']) }}" method="GET">
                 <div class="input-group d-flex mb-3">
-                    <input type="text" name="search" class="form-control" placeholder="Search for restaurants">
+                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm nhà hàng">
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
+                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </div>
                 </div>
             </form>
@@ -42,16 +42,16 @@
             <div class="btn-group float-right" style="padding-right: 15px;">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-sort-amount-up"></i> Sort
+                    <i class="fas fa-sort-amount-up"></i> Sắp xếp
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <h6 class="dropdown-header">Sort By</h6>
+                    <h6 class="dropdown-header">Sắp xếp theo</h6>
                     <a class="dropdown-item" href="{{ route('home.index', ['sort' => 'delivery']) }}"><i
-                            class="fas fa-car" style="width:14px"></i> Delivery Fee</a>
+                            class="fas fa-car" style="width:14px"></i> Phí giao hàng</a>
                     <a class="dropdown-item" href="{{ route('home.index', ['sort' => 'reviews']) }}"><i
-                            class="fas fa-award" style="width:14px"></i> Reviews</a>
+                            class="fas fa-award" style="width:14px"></i> Đánh giá</a>
                     <a class="dropdown-item" href="{{ route('home.index', ['sort' => 'price']) }}"><i
-                            class="fas fa-dollar-sign" style="width:14px"></i> Price</a>
+                            class="fas fa-dollar-sign" style="width:14px"></i> Giá</a>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
     @if(auth()->user() && auth()->user()->favorites->first())
     <div class="row mt-4">
         <h2 class="col-md-12"><span class="highlight-container-r"><span class="highlight"><i class="fas fa-heart"></i>
-                    Favorite Restaurants</span></span></h2>
+                    Nhà hàng yêu thích</span></span></h2>
         <div class="col-md-12">
             <div class="my-slider mb-5">
                 @foreach(auth()->user()->favorites as $fav)
