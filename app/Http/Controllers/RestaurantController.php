@@ -222,7 +222,7 @@ class RestaurantController extends Controller
             File::delete(public_path('storage/' . $menu->image));
         }
         Menu::destroy($menu->id);
-        return redirect()->back()->with('success', 'Menu Item Deleted Successfully.');
+        return redirect()->back()->with('success', 'Đã xóa món thành công.');
     }
 
     public function addCategory()
@@ -249,7 +249,7 @@ class RestaurantController extends Controller
                     auth()->user()->categories()->attach($data['category_id']);
             }
         } else {
-            return redirect()->back()->with('error', 'That category already exists for this restaurant');
+            return redirect()->back()->with('error', 'Danh mục này đã tồn tại cho nhà hàng này');
         }
 
         return redirect()->back();

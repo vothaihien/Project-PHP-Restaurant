@@ -18,7 +18,7 @@ use App\Http\Controllers\Auth\LoginController;
 |--------------------------------------------------------------------------
 */
 
-Route::view('/', 'welcome');
+Route::redirect('/', '/home');
 Auth::routes();
 
 Route::get('/login/pigeon', [LoginController::class, 'showPigeonLoginForm'])->name('login.pigeon');

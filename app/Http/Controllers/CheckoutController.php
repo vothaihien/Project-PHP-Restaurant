@@ -94,7 +94,7 @@ class CheckoutController extends Controller
 
         if (empty($sessionAddress) && !$storedAddress) {
             \Log::error('No address found for checkout');
-            return redirect()->back()->withErrors('Please enter your delivery address.');
+            return redirect()->back()->withErrors('Vui lòng nhập địa chỉ giao hàng.');
         }
 
         // Nếu có địa chỉ trong session, lưu nó cho user
@@ -117,7 +117,7 @@ class CheckoutController extends Controller
             ]);
         } catch (\Exception $e) {
             \Log::error('Error in checkout process: ' . $e->getMessage());
-            return redirect()->back()->withErrors('An error occurred during checkout. Please try again.');
+            return redirect()->back()->withErrors('Đã xảy ra lỗi trong quá trình thanh toán. Vui lòng thử lại.');
         }
     }
 

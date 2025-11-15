@@ -13,7 +13,7 @@
             <div class="header-body">
                 <div class="row">
                     <div class="col-md-12 {{ $class ?? '' }}">
-                        <h1 class="display-2 text-white">Orders</h1>
+                        <h1 class="display-2 text-white">Đơn hàng</h1>
                     </div>
                 </div>
                 <div class="row align-items-center">
@@ -22,13 +22,13 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="{{ route('restaurant.index') }}"><i
                                             class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Restaurant</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Orders</li>
+                                <li class="breadcrumb-item"><a href="#">Nhà hàng</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        <a href="#" class="btn btn-sm btn-neutral">Lọc</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 <div class="card shadow">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Orders</h3>
+                        <h3 class="mb-0">Đơn hàng</h3>
                     </div>
                     <!-- Table -->
                     <div class="table-responsive" data-toggle="list"
@@ -49,10 +49,10 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="sort" data-sort="ordered_at">Order Placed On</th>
-                                    <th scope="col" class="sort" data-sort="status">status</th>
-                                    <th scope="col" class="sort" data-sort="quantity">Item Quantity</th>
-                                    <th scope="col" class="sort" data-sort="total">Total</th>
+                                    <th scope="col" class="sort" data-sort="ordered_at">Ngày đặt hàng</th>
+                                    <th scope="col" class="sort" data-sort="status">Trạng thái</th>
+                                    <th scope="col" class="sort" data-sort="quantity">Số lượng món</th>
+                                    <th scope="col" class="sort" data-sort="total">Tổng cộng</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -79,7 +79,7 @@
                                         <td>
                                             <button class="btn btn-sm" data-toggle="tooltip"
                                                 onclick="window.location ='{{ route('restaurant.orderDetails', $order->id) }}'">
-                                                <i class="fas fa-info-circle"></i> View
+                                                <i class="fas fa-info-circle"></i> Xem
                                             </button>
                                         </td>
                                     </tr>

@@ -84,7 +84,7 @@ class DriverController extends Controller
     public function reserve(Order $order)
     {
         if (!auth()->user()->drivers_license || !auth()->user()->vehicle) {
-            return redirect()->back()->withErrors('Complete your profile to reserve an order.');
+            return redirect()->back()->withErrors('Vui lòng hoàn tất hồ sơ của bạn để đặt chỗ đơn hàng.');
         }
         
         // Check if driver already has a reserved order
@@ -94,7 +94,7 @@ class DriverController extends Controller
             })->exists();
             
         if ($hasReserved) {
-            return redirect()->back()->withErrors('You already have an active reserved order.');
+            return redirect()->back()->withErrors('Bạn đã có một đơn hàng đang được đặt chỗ.');
         }
         $order->update(['driver_id' => auth()->user()->id]);
         OrderStatus::create([
@@ -134,14 +134,14 @@ class DriverController extends Controller
         ]);
         
         // Redirect về driver dashboard để nhận đơn mới
-        return redirect()->route('driver.index')->with('success', 'Order delivered successfully! You can now pick up new orders.');
+        return redirect()->route('driver.index')->with('success', 'Giao hàng thành công! Bạn có thể nhận đơn hàng mới ngay bây giờ.');
     }
 
     public function storeDriversLicense(DriversLicenseRequest $request)
     {
         // Check if driver already has a license
         if (auth()->user()->drivers_license) {
-            return redirect()->back()->withErrors('You have already submitted your drivers license information.');
+            return redirect()->back()->withErrors('Bạn đã gửi thông tin bằng lái xe rồi.');
         }
 
         try {
@@ -154,7 +154,7 @@ class DriverController extends Controller
                 'expires_on' => $request['expires_on'],
             ]);
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('Error saving drivers license: ' . $e->getMessage())->withInput();
+            return redirect()->back()->withErrors('Lỗi khi lưu bằng lái xe: ' . $e->getMessage())->withInput();
         }
 
         // Redirect based on vehicle status

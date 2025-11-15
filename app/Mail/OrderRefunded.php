@@ -33,7 +33,7 @@ class OrderRefunded extends Mailable
     {
         return $this->from('support@whypigeonswhy.com', 'Pigeon')
             ->to($this->order->user->email, $this->order->user->name)
-            ->subject('Food and maybe some Pigeons Order Refunded')
+            ->subject('Đơn hàng đã được hoàn tiền - Food and Maybe Pigeons')
             ->markdown('emails.refunded');
     }
 }

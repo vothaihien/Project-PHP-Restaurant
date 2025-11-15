@@ -165,7 +165,7 @@ class PigeonController extends Controller
             'status' => 'cancelled',
             'created_at' => now()
         ]);
-        return redirect()->back()->with('success', 'Order Cancelled Successfully');
+        return redirect()->back()->with('success', 'Đã hủy đơn hàng thành công');
     }
 
     public function refundOrder(Order $order)
@@ -178,7 +178,7 @@ class PigeonController extends Controller
 
         $secret = config('services.stripe.secret') ?? env('STRIPE_SECRET');
         if (!$secret) {
-            return redirect()->back()->with('error', 'Stripe secret not configured.');
+            return redirect()->back()->with('error', 'Stripe secret chưa được cấu hình.');
         }
 
         try {
@@ -204,10 +204,10 @@ class PigeonController extends Controller
             ]);
             Mail::send(new OrderRefunded($order));
 
-            return redirect()->back()->with('success', 'Order Refunded Successfully');
+            return redirect()->back()->with('success', 'Đã hoàn tiền đơn hàng thành công');
         } catch (\Exception $e) {
             \Log::error('Stripe refund error: ' . $e->getMessage(), ['order_id' => $order->id]);
-            return redirect()->back()->with('error', 'Refund failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hoàn tiền thất bại: ' . $e->getMessage());
         }
     }
 
@@ -247,7 +247,7 @@ class PigeonController extends Controller
             'password' => Hash::make($data['temp_pass'])
         ]);
 
-        return redirect()->back()->with('success', 'Updated Successfully');
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 
     public function updateAccount()
@@ -265,6 +265,6 @@ class PigeonController extends Controller
             'new_password' => Hash::make($data['new_password']),
         ]);
 
-        return redirect()->back()->with('success', 'Updated Successfully');
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 }

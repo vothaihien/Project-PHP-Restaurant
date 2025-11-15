@@ -7,19 +7,19 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ isset($url) ? ucwords($url) : ""}} {{ __('Register') }}</div>
+                <div class="card-header">{{ isset($url) ? ucwords($url) : ""}} Đăng ký</div>
 
                 <div class="card-body">
                     @isset($url)
-                        <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
+                        <form method="POST" action='{{ url("register/$url") }}' aria-label="Đăng ký">
                     @else
                         {{ $url = '' }}
-                        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        <form method="POST" action="{{ route('register') }}" aria-label="Đăng ký">
                     @endisset
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Tên</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -34,7 +34,7 @@
 
                         <div class="form-group row">
                             @if ($url === 'pigeon')
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                <label for="username" class="col-md-4 col-form-label text-md-right">Tên người dùng</label>
 
                                 <div class="col-md-6">
                                     <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
@@ -46,7 +46,7 @@
                                     @enderror
                                 </div>
                             @else
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">Địa chỉ email</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -62,7 +62,7 @@
 
                         @if ($url==='driver' || $url === '')
                             <div class="form-group row">
-                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">Số điện thoại</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
@@ -77,7 +77,7 @@
                         @endif
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Xác nhận mật khẩu</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -101,7 +101,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    Đăng ký
                                 </button>
                             </div>
                         </div>
